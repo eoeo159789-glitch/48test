@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第48期新訓・考前複習手冊</title>
+<style>
+:root{
+  --ink:#1B2A4A;
+  --ink-2:#2C3E5C;
+  --paper:#F6F4EC;
+  --paper-2:#FFFFFF;
+  --gold:#A9782F;
+  --gold-soft:#E7DAB8;
+  --red:#8B3A3A;
+  --red-soft:#F3E3E1;
+  --green:#3C6E47;
+  --green-soft:#E1EBE0;
+  --line:#DCD5C2;
+  --muted:#5B6478;
+  --radius:2px;
+  --serif:"Noto Serif TC","Source Han Serif TC","PMingLiU",serif;
+  --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+}
+*{box-sizing:border-box;min-width:0;}
+html{scroll-behavior:smooth;}
+html,body{
+  margin:0;
+  overflow-x:hidden;
+}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.75;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:var(--serif);
+  font-weight:700;
+  color:var(--ink);
+  line-height:1.4;
+  margin:0 0 .6em 0;
+}
+a{color:var(--gold);}
+p{margin:0 0 1em 0;}
+ul,ol{margin:0 0 1em 0;padding-left:1.3em;}
+li{margin-bottom:.4em;}
+
+/* ===== Layout shell ===== */
+.shell{
+  display:flex;
+  min-height:100vh;
+}
+
+/* ---- Top bar (mobile) ---- */
+.topbar{
+  display:none;
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:var(--ink);
+  color:#fff;
+  padding:.85rem 1rem;
+  align-items:center;
+  justify-content:space-between;
+}
+.topbar .brand{
+  font-family:var(--serif);
+  font-size:1.02rem;
+  font-weight:700;
+  letter-spacing:.01em;
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  flex:1 1 auto;
+  margin-right:.8rem;
+}
+.topbar .hamburger{
+  width:34px;height:34px;
+  flex:0 0 34px;
+  border:1px solid rgba(255,255,255,.35);
+  background:transparent;
+  border-radius:var(--radius);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+}
+
+/* ---- Sidebar ---- */
+.sidebar{
+  width:272px;
+  flex-shrink:0;
+  background:var(--ink);
+  color:#EDE8D9;
+  position:sticky;
+  top:0;
+  align-self:flex-start;
+  height:100vh;
+  overflow-y:auto;
+  padding:1.6rem 0 2.4rem;
+}
+.sidebar .brand{
+  padding:0 1.4rem 1.2rem;
+  border-bottom:1px solid rgba(237,232,217,.15);
+  margin-bottom:1rem;
+}
+.sidebar .brand .badge{
+  display:inline-block;
+  font-size:.68rem;
+  letter-spacing:.12em;
+  color:var(--gold-soft);
+  border:1px solid rgba(231,218,184,.4);
+  padding:.15rem .5rem;
+  border-radius:var(--radius);
+  margin-bottom:.6rem;
+}
+.sidebar .brand h1{
+  color:#fff;
+  font-size:1.28rem;
+  margin:0 0 .25rem 0;
+}
+.sidebar .brand .sub{
+  font-size:.78rem;
+  color:#B9C0D4;
+}
+.navgroup{margin-bottom:.3rem;}
+.navgroup-title{
+  font-size:.7rem;
+  letter-spacing:.1em;
+  color:#8C93AC;
+  padding:1rem 1.4rem .35rem;
+}
+.navlink{
+  display:flex;
+  align-items:baseline;
+  gap:.55rem;
+  padding:.5rem 1.4rem;
+  color:#D9DCE8;
+  text-decoration:none;
+  font-size:.88rem;
+  border-left:3px solid transparent;
+  cursor:pointer;
+}
+.navlink .num{
+  font-family:var(--serif);
+  color:var(--gold-soft);
+  font-size:.78rem;
+  width:1.4em;
+  flex-shrink:0;
+}
+.navlink:hover{background:rgba(255,255,255,.05);color:#fff;}
+.navlink.active{
+  background:rgba(169,120,47,.18);
+  border-left-color:var(--gold);
+  color:#fff;
+  font-weight:700;
+}
+
+/* ---- Main ---- */
+.main{
+  flex:1;
+  min-width:0;
+  padding:3.2rem 4vw 6rem;
+}
+.content-wrap{
+  max-width:760px;
+  margin:0 auto;
+}
+.page{display:none;}
+.page.active{display:block;}
+
+.page-eyebrow{
+  font-size:.78rem;
+  color:var(--gold);
+  font-weight:700;
+  letter-spacing:.04em;
+  margin-bottom:.5rem;
+}
+.page h2.page-title{
+  font-size:1.9rem;
+  border-bottom:2px solid var(--ink);
+  padding-bottom:.5rem;
+  margin-bottom:1.4rem;
+}
+.page-lede{
+  color:var(--muted);
+  font-size:1rem;
+  margin-bottom:2rem;
+}
+
+.card{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.3rem 1.5rem;
+  margin-bottom:1.3rem;
+}
+.card h3{font-size:1.08rem;margin-bottom:.7rem;color:var(--ink-2);}
+.card h3 .tag{
+  display:inline-block;
+  font-size:.68rem;
+  font-family:var(--sans);
+  font-weight:700;
+  color:var(--gold);
+  border:1px solid var(--gold-soft);
+  background:#FBF7EC;
+  padding:.1rem .45rem;
+  border-radius:var(--radius);
+  vertical-align:middle;
+  margin-right:.5rem;
+}
+
+.law-cite{
+  font-size:.85rem;
+  color:var(--gold);
+  font-weight:700;
+  margin-bottom:.3rem;
+}
+
+.callout{
+  border-left:3px solid var(--gold);
+  background:#FBF8EF;
+  padding:.85rem 1.1rem;
+  margin:1rem 0;
+  font-size:.94rem;
+}
+.callout.warn{border-left-color:var(--red);background:var(--red-soft);}
+.callout.ok{border-left-color:var(--green);background:var(--green-soft);}
+.callout strong{color:var(--ink);}
+
+.table-scroll{
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  margin:1rem 0;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:.88rem;
+}
+.table-scroll table{margin:0;}
+table caption{text-align:left;font-size:.78rem;color:var(--muted);margin-bottom:.4rem;}
+th,td{
+  border:1px solid var(--line);
+  padding:.55rem .6rem;
+  text-align:left;
+  vertical-align:top;
+}
+th{
+  background:var(--ink);
+  color:#fff;
+  font-weight:700;
+  font-size:.82rem;
+}
+tr:nth-child(even) td{background:#FBFAF5;}
+
+.stepflow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0;
+  margin:1.4rem 0;
+  counter-reset:step;
+}
+.stepflow .step{
+  flex:1 1 110px;
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-top:3px solid var(--gold);
+  padding:.75rem .6rem;
+  text-align:center;
+  font-size:.86rem;
+  position:relative;
+}
+.stepflow .step .n{
+  font-family:var(--serif);
+  font-size:1.3rem;
+  color:var(--gold);
+  display:block;
+}
+.stepflow .arrow{
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);
+  padding:0 .2rem;
+  font-size:1rem;
+  flex:0 0 auto;
+}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;}
+.minicard{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  padding:.8rem .9rem;
+  border-radius:var(--radius);
+  font-size:.87rem;
+}
+.minicard .lbl{
+  font-weight:700;
+  color:var(--ink-2);
+  display:block;
+  margin-bottom:.25rem;
+  font-size:.86rem;
+}
+
+.deadline{
+  display:inline-block;
+  font-weight:700;
+  color:var(--red);
+  background:var(--red-soft);
+  padding:.05rem .4rem;
+  border-radius:var(--radius);
+}
+
+.toc-jump{
+  font-size:.82rem;
+  color:var(--muted);
+  margin-bottom:1.6rem;
+}
+.toc-jump a{color:var(--ink-2);text-decoration:none;border-bottom:1px dotted var(--line);margin-right:.9rem;}
+
+/* ===== Quiz ===== */
+.quiz-controlbar{
+  position:sticky;
+  top:0;
+  background:var(--paper);
+  padding:.8rem 0 1rem;
+  z-index:5;
+  border-bottom:1px solid var(--line);
+  margin-bottom:1.4rem;
+}
+.quiz-score{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:.6rem;
+  margin-bottom:.8rem;
+}
+.quiz-score .tally{
+  font-family:var(--serif);
+  font-size:1.05rem;
+}
+.quiz-score .tally b{color:var(--gold);font-size:1.3rem;}
+.filterrow{
+  display:flex;
+  gap:.45rem;
+  flex-wrap:wrap;
+}
+.chip{
+  border:1px solid var(--line);
+  background:var(--paper-2);
+  padding:.32rem .8rem;
+  border-radius:999px;
+  font-size:.8rem;
+  cursor:pointer;
+  color:var(--ink-2);
+}
+.chip.active{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink);
+}
+.reset-btn{
+  border:1px solid var(--red);
+  color:var(--red);
+  background:#fff;
+  padding:.32rem .8rem;
+  border-radius:999px;
+  font-size:.8rem;
+  cursor:pointer;
+}
+
+.qcard{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.2rem 1.3rem 1.3rem;
+  margin-bottom:1.1rem;
+}
+.qcard .qmeta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:.5rem;
+}
+.qcard .qcat{
+  font-size:.7rem;
+  font-weight:700;
+  color:var(--gold);
+  background:#FBF7EC;
+  border:1px solid var(--gold-soft);
+  padding:.08rem .5rem;
+  border-radius:var(--radius);
+}
+.qcard .qnum{font-size:.78rem;color:var(--muted);}
+.qcard .qtext{
+  font-size:1rem;
+  font-weight:700;
+  margin-bottom:.9rem;
+  color:var(--ink);
+}
+.opts{list-style:none;margin:0;padding:0;}
+.opt{
+  display:flex;
+  gap:.6rem;
+  align-items:flex-start;
+  border:1px solid var(--line);
+  padding:.55rem .75rem;
+  margin-bottom:.5rem;
+  border-radius:var(--radius);
+  cursor:pointer;
+  font-size:.92rem;
+  background:#fff;
+}
+.opt:hover{border-color:var(--gold);}
+.opt .k{font-weight:700;color:var(--gold);flex-shrink:0;}
+.opt.correct{background:var(--green-soft);border-color:var(--green);}
+.opt.correct .k{color:var(--green);}
+.opt.wrong{background:var(--red-soft);border-color:var(--red);}
+.opt.wrong .k{color:var(--red);}
+.opt.disabled{cursor:default;}
+.explain{
+  display:none;
+  margin-top:.8rem;
+  padding:.8rem 1rem;
+  background:#F6F4EC;
+  border-left:3px solid var(--gold);
+  font-size:.88rem;
+  color:var(--ink-2);
+}
+.explain.show{display:block;}
+.explain b{color:var(--ink);}
+
+/* ===== Home ===== */
+.hero{
+  border:1px solid var(--line);
+  background:linear-gradient(135deg,var(--ink) 0%, #24365C 100%);
+  color:#fff;
+  padding:2.4rem 2rem;
+  margin-bottom:1.8rem;
+  border-radius:var(--radius);
+}
+.hero .badge{
+  display:inline-block;
+  font-size:.7rem;
+  letter-spacing:.1em;
+  border:1px solid rgba(255,255,255,.4);
+  color:var(--gold-soft);
+  padding:.15rem .55rem;
+  border-radius:var(--radius);
+  margin-bottom:.9rem;
+}
+.hero h2{color:#fff;font-size:1.7rem;margin-bottom:.6rem;}
+.hero p{color:#C9CFE0;max-width:46em;}
+.home-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:.9rem;
+  margin-top:1.6rem;
+}
+.home-link{
+  display:block;
+  border:1px solid var(--line);
+  background:var(--paper-2);
+  padding:1rem 1.15rem;
+  border-radius:var(--radius);
+  text-decoration:none;
+  color:var(--ink);
+  cursor:pointer;
+}
+.home-link:hover{border-color:var(--gold);}
+.home-link .n{
+  font-family:var(--serif);
+  color:var(--gold);
+  font-size:.85rem;
+  display:block;
+  margin-bottom:.2rem;
+}
+.home-link .t{font-weight:700;font-size:.98rem;}
+.home-link .d{font-size:.82rem;color:var(--muted);margin-top:.2rem;}
+
+.sourcebox{
+  font-size:.78rem;
+  color:var(--muted);
+  border-top:1px dashed var(--line);
+  margin-top:2.6rem;
+  padding-top:1rem;
+}
+
+@media (max-width:900px){
+  .home-grid{grid-template-columns:1fr;}
+  .grid2{grid-template-columns:1fr;}
+  .grid4{grid-template-columns:repeat(2,1fr);}
+}
+
+@media (max-width:820px){
+  .topbar{display:flex;}
+  .sidebar{
+    position:fixed;
+    left:0;top:0;bottom:0;
+    z-index:50;
+    transform:translateX(-100%);
+    transition:transform .25s ease;
+    height:100%;
+    width:78vw;
+    max-width:320px;
+  }
+  .sidebar.open{transform:translateX(0);}
+  .sidebar-backdrop{
+    display:none;
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.4);
+    z-index:45;
+  }
+  .sidebar-backdrop.show{display:block;}
+  .main{padding:1.6rem 5vw 5rem;}
+  .page h2.page-title{font-size:1.5rem;}
+  .hero{padding:1.6rem 1.3rem;}
+  .hero h2{font-size:1.35rem;}
+  .stepflow{flex-direction:column;}
+  .stepflow .arrow{transform:rotate(90deg);padding:.15rem 0;}
+  .table-scroll table{min-width:560px;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">第48期新訓・複習手冊</div>
+  <button class="hamburger" id="hamburgerBtn" aria-label="開啟選單">☰</button>
+</div>
+<div class="sidebar-backdrop" id="backdrop"></div>
+
+<div class="shell">
+  <nav class="sidebar" id="sidebar">
+    <div class="brand">
+      <span class="badge">審計部・第48期新訓</span>
+      <h1>考前複習手冊</h1>
+      <div class="sub">依課堂簡報與講義整理</div>
+    </div>
+
+    <div class="navgroup">
+      <div class="navgroup-title">導覽</div>
+      <div class="navlink" data-page="home"><span class="num">・</span>總覽</div>
+    </div>
+
+    <div class="navgroup">
+      <div class="navgroup-title">審計組織與職權</div>
+      <div class="navlink" data-page="org"><span class="num">01</span>監察院與審計機關</div>
+      <div class="navlink" data-page="strategy"><span class="num">02</span>審計策略與智慧審計</div>
+      <div class="navlink" data-page="cases"><span class="num">03</span>大法官解釋與司法案例</div>
+    </div>
+
+    <div class="navgroup">
+      <div class="navgroup-title">地方自治法規</div>
+      <div class="navlink" data-page="localgov"><span class="num">04</span>地方制度法與釋憲</div>
+    </div>
+
+    <div class="navgroup">
+      <div class="navgroup-title">審計實務</div>
+      <div class="navlink" data-page="internal-control"><span class="num">05</span>內部控制評核</div>
+      <div class="navlink" data-page="evidence"><span class="num">06</span>查核發現與審計證據</div>
+      <div class="navlink" data-page="techtools"><span class="num">07</span>數位分析與AI工具</div>
+      <div class="navlink" data-page="workpaper"><span class="num">08</span>查核工作底稿規範</div>
+      <div class="navlink" data-page="edata"><span class="num">09</span>電子資料檔案管理</div>
+    </div>
+
+    <div class="navgroup">
+      <div class="navgroup-title">廉政法規</div>
+      <div class="navlink" data-page="ethics"><span class="num">10</span>利益衝突與廉政倫理</div>
+    </div>
+
+    <div class="navgroup">
+      <div class="navgroup-title">自我測驗</div>
+      <div class="navlink" data-page="quiz"><span class="num">✓</span>題庫測驗（52題）</div>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="content-wrap">
+
+      <!-- ========================= HOME ========================= -->
+      <section class="page active" id="page-home">
+        <div class="hero">
+          <span class="badge">EXAM REVIEW</span>
+          <h2>第48期新訓・考前複習手冊</h2>
+          <p>整理自課堂簡報照片、審計部業務重點簡報與題庫講義，涵蓋審計組織職權、地方自治法規、審計實務方法、工作底稿規範、電子資料管理與廉政法規六大範圍，並附 52 題互動測驗。</p>
+        </div>
+        <p class="page-lede">點選下方主題卡片，或使用左側選單瀏覽各章節。建議先瀏覽各章重點，再至「題庫測驗」自我檢核。</p>
+        <div class="home-grid">
+          <div class="home-link" data-page="org"><span class="n">01</span><span class="t">監察院與審計機關</span><span class="d">彈劾／糾舉／糾正比較、審計法第2條七項職權</span></div>
+          <div class="home-link" data-page="strategy"><span class="n">02</span><span class="t">審計策略與智慧審計</span><span class="d">使命願景、四大策略、AI審計資料中心</span></div>
+          <div class="home-link" data-page="cases"><span class="n">03</span><span class="t">大法官解釋與司法案例</span><span class="d">釋字41、46、184、553號等六則案例</span></div>
+          <div class="home-link" data-page="localgov"><span class="n">04</span><span class="t">地方制度法與釋憲</span><span class="d">地制法24-1、28條、憲訴法82-83條、111年憲判6號</span></div>
+          <div class="home-link" data-page="internal-control"><span class="n">05</span><span class="t">內部控制評核</span><span class="d">COSO五大要素與十七項原則</span></div>
+          <div class="home-link" data-page="evidence"><span class="n">06</span><span class="t">查核發現與審計證據</span><span class="d">四要素、證據四來源、審計流程圖</span></div>
+          <div class="home-link" data-page="techtools"><span class="n">07</span><span class="t">數位分析與AI工具</span><span class="d">GBA/CBA/GIS、多元AI工具對應審計階段</span></div>
+          <div class="home-link" data-page="workpaper"><span class="n">08</span><span class="t">查核工作底稿規範</span><span class="d">四大內容、覆核責任、歸檔時間</span></div>
+          <div class="home-link" data-page="edata"><span class="n">09</span><span class="t">電子資料檔案管理</span><span class="d">14工作日通報、銷毀流程與期限</span></div>
+          <div class="home-link" data-page="ethics"><span class="n">10</span><span class="t">利益衝突與廉政倫理</span><span class="d">利衝法揭露義務、出入境管制</span></div>
+        </div>
+        <div class="sourcebox">
+          資料來源：0915上午總決算審編簡報、審計部業務重點簡報（重點.pptx）、第48期新訓課堂投影片照片、預算法會計法政府採購法題庫暨法條依據詳解手冊。
+        </div>
+      </section>
+
+      <!-- content pages inserted below by build script -->
+      
+
+<!-- ========================= 01 ORG ========================= -->
+<section class="page" id="page-org">
+  <div class="page-eyebrow">CHAPTER 01</div>
+  <h2 class="page-title">監察院與審計機關</h2>
+  <p class="page-lede">監察院係國家最高監察機關，職權為行使彈劾、糾舉及審計權，並得對政府機關施政提出糾正案；監察委員得收受人民書狀，辦理巡迴監察、調查等。核心價值：獨立 Independence、廉正 Integrity、專業 Professionalism、創新 Innovation。</p>
+
+  <div class="card">
+    <h3>彈劾權・糾舉權・糾正權比較</h3>
+    <table>
+      <tr><th>項目</th><th>彈劾案</th><th>糾舉案</th><th>糾正案</th></tr>
+      <tr><td>行使原因</td><td>公務人員有違法或失職行為</td><td>公務人員有違法或失職行為，並有先行停職或其他急速處分之必要時</td><td>行政院及其所屬各機關之工作及設施有違法或失職情事</td></tr>
+      <tr><td>行使對象</td><td>中央及地方機關公務人員</td><td>中央及地方機關公務人員</td><td>行政院及其所屬各機關</td></tr>
+      <tr><td>審查及決定</td><td>監察委員2人以上提案，9人以上審查及決定</td><td>監察委員1人以上提議，3人以上審查及決定</td><td>監察院有關委員會審查及決定</td></tr>
+      <tr><td>移送機關</td><td>向懲戒機關提出</td><td>向被糾舉人主管或上級長官提出</td><td>向行政院或有關部會提出</td></tr>
+      <tr><td>目的</td><td>懲戒處分（如撤職、記過）</td><td>促使主管或上級長官注意改善，得先行停職或其他急速處分</td><td>督促行政機關注意改善</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">審計法第2條</span>政府審計七項職權</h3>
+    <ol>
+      <li>監督預算之執行</li>
+      <li>核定收支命令</li>
+      <li>審核財務收支，審定決算</li>
+      <li>稽察財物及財政上之不法或不忠於職務之行為</li>
+      <li>考核財務效能</li>
+      <li>核定財務責任</li>
+      <li>其他依法律應行辦理之審計事項</li>
+    </ol>
+    <div class="callout">
+      <strong>審計法第69條</strong>：審計機關考核各機關績效，如認為未盡職責或效能過低者，除通知上級機關長官外，並應報告監察院；由於制度規章缺失或設施不良者，應提出建議改善意見（<b>洞察</b>）。發現有影響施政或營（事）業效能之潛在風險事項，得提出預警性意見（<b>前瞻</b>）。
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>審計機關的憲法與組織依據</h3>
+    <div class="grid2">
+      <div class="minicard"><span class="lbl">憲法第104條</span>監察院設審計長，由總統提名，經立法院同意任命之。</div>
+      <div class="minicard"><span class="lbl">審計部組織法第3條</span>審計長之任期為六年。</div>
+      <div class="minicard"><span class="lbl">審計法第10條</span>審計人員依法獨立行使其審計職權，不受干涉。</div>
+      <div class="minicard"><span class="lbl">憲法第111條</span>未列舉事項：全國一致性質屬中央、全省一致性質屬省、一縣性質屬縣；遇爭議由立法院解決。</div>
+    </div>
+    <p style="margin-top:.9rem;"><span class="law-cite">審計法第5條</span>各省（市）政府及所屬機關財務之審計，由各該省（市）審計處辦理；各縣（市）政府及所屬機關財務之審計，由各該縣（市）酌設審計室辦理。</p>
+  </div>
+
+  <div class="card">
+    <h3>院部業務聯繫（依法應陳報／報告監察院案件）</h3>
+    <p><b>應陳報監察院核辦案件（第2點）</b>——審計人員發覺各機關人員財務上不法或不忠於職務之行為，符合下列情事之一：</p>
+    <ul>
+      <li>涉及機關首長、民選首長、簡任職等以上人員</li>
+      <li>涉及違失金額新臺幣3,000萬元以上，且情節重大</li>
+      <li>涉及機關通案性、集體性違失</li>
+      <li>其他涉及財務上違失情節重大（細則第16條）</li>
+    </ul>
+    <p style="margin-top:.5rem;">另依<span class="law-cite">審計法第14條</span>：審計人員向各機關查閱簿籍、憑證或文件，或檢查現金、財物時，主管人員有隱匿或拒絕，或對疑問不為詳實答復者；及<span class="law-cite">審計法第20條</span>：審計機關通知處分之案件，機關延壓或處分不當，經查詢仍不為負責答復或答復不當者。</p>
+    <p style="margin-top:.8rem;"><b>應報告監察院案件（第3點）</b>：</p>
+    <ul>
+      <li><span class="law-cite">審計法第17條</span>——審計人員發覺財務上不法或不忠於職務行為，涉及刑事，經審計機關移送法辦者</li>
+      <li><span class="law-cite">審計法第69條</span>——審計機關考核績效，認為未盡職責或效能過低者</li>
+      <li><span class="law-cite">監察院與審計部權責劃分原則第13點</span>——審計人員參加財務會議，對違背審計法令之決議事項，經依法表示異議仍未獲採納者</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= 02 STRATEGY ========================= -->
+<section class="page" id="page-strategy">
+  <div class="page-eyebrow">CHAPTER 02</div>
+  <h2 class="page-title">審計策略與智慧審計</h2>
+  <p class="page-lede">審計長自108年10月上任後，接軌國際政府審計發展潮流，積極推動組織變革，並於114年9月立法院全院委員會審查人事同意權時，揭示未來六年施政方針。</p>
+
+  <div class="card">
+    <h3>使命與願景（108年9月）</h3>
+    <div class="grid2">
+      <div class="minicard"><span class="lbl">使命</span>善盡審計職責、發揮監察功能</div>
+      <div class="minicard"><span class="lbl">願景</span>踐行優質審計服務、創造最大審計價值、促進國家良善治理、實現國家永續發展</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>四大施政方針（114年9月揭示，主政單位）</h3>
+    <table>
+      <tr><th>方針</th><th>內容</th><th>主政</th></tr>
+      <tr><td>智慧審計 Smart Audit</td><td>拓展資訊科技與AI人工智慧應用，全面提升審計效能</td><td>第六廳</td></tr>
+      <tr><td>永續審計 Sustainable Audit</td><td>導入國際實務強化永續發展目標之審計，落實環境與社會治理監督</td><td>第五廳</td></tr>
+      <tr><td>韌性審計 Resilient Audit</td><td>以前瞻觀點協助政府精進風險管理與韌性治理能力</td><td>關鍵會</td></tr>
+      <tr><td>共臻善治 Good Governance</td><td>透過審計行政協力機制，共同實現政府善治願景</td><td>業研會</td></tr>
+    </table>
+    <p class="callout">115–120年審計機關業務發展架構，參照 <b>INTOSAI</b> 最高審計機關策略管理架構，整合監督功能、洞察功能、前瞻功能，並以永續審計深化發展，追求影響力（Impact）與共臻善治。</p>
+  </div>
+
+  <div class="card">
+    <h3>智慧審計：定義與重要性</h3>
+    <p>將底層 Python、資料庫、傳統分析工具、空間視覺化及生成式AI等數位轉型技術，整合到政府審計體系中的最終藍圖——<b>科技輔助，而非取代專業判斷</b>。</p>
+    <div class="grid4">
+      <div class="minicard"><span class="lbl">1・提高審計效率</span>自動化處理，節省人力與時間</div>
+      <div class="minicard"><span class="lbl">2・提升審計品質</span>分析更全面、判斷更精準</div>
+      <div class="minicard"><span class="lbl">3・強化風險評估</span>即時發現異常與潛在風險</div>
+      <div class="minicard"><span class="lbl">4・提升審計價值</span>從事後查核走向前瞻建議</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>AI審計資料中心 － 三階段AI顧問／助理</h3>
+    <table>
+      <tr><th>階段</th><th>資料來源</th><th>AI工具／功能</th></tr>
+      <tr><td>規劃階段</td><td>行政機關法規、計畫、成果報告</td><td>查核規劃AI助理－查核重點建議、規劃矩陣初擬</td></tr>
+      <tr><td rowspan="3">查核階段（智能分析）</td><td>總決算審核報告、小花系統審核通知</td><td>審計經驗AI顧問－轄審機關查核軌跡、同性質查核案例觀摩、主題式檢索摘要</td></tr>
+      <tr><td>輿情系統新聞報導、立院質詢影音轉文字</td><td>輿情蒐集AI顧問－定期摘要、推送、主題式檢索</td></tr>
+      <tr><td>GAO、NAO審計報告、指引</td><td>國際新知AI顧問－主題式檢索、摘要</td></tr>
+      <tr><td>報導階段</td><td>會計報告書面審核紀錄等</td><td>RPA機器人助理－監督預算執行資訊公開、審核報告決算數據核對、定型稿件撰擬、查詢平台</td></tr>
+    </table>
+    <p style="font-size:.85rem;color:var(--muted);">查核階段之分析工具另包含：購置商業軟體（Arbutus、ArcGIS、LLM訂閱如ChatGPT）、開源免費軟體（Python、Q-GIS）、模組工具集（數位審計模組、財物稽察模組）及程式碼銀行（依施政主題分類蒐集查核案例程式碼）。</p>
+  </div>
+
+  <div class="card">
+    <h3>韌性審計八大治理領域</h3>
+    <p>盤點識別政府韌性治理領域、持續蒐集彙整各審計單位查核成果，建立查核計畫連結關鍵審計議題之作業機制，加強韌性治理知能培訓：</p>
+    <ul>
+      <li>公共治理與制度韌性</li><li>能源安全與電網韌性</li><li>關鍵基礎設施與供應鏈韌性</li><li>醫療與社會韌性</li>
+      <li>經濟與農業韌性</li><li>氣候環境與災害韌性</li><li>數位與資通安全韌性</li><li>國防安全與全民防衛韌性</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>共臻善治：打造健全利害關係人生態圈</h3>
+    <div class="grid2">
+      <div class="minicard"><span class="lbl">行政機關・深化溝通交流</span>精進發掘及擴散行政機關優良案例機制，並強化內外審協力</div>
+      <div class="minicard"><span class="lbl">公民・主動促進公民參與</span>強化審計意見與民眾關注焦點或輿情發展動態契合程度，增進政府資訊透明</div>
+    </div>
+    <div class="minicard" style="margin-top:.7rem;"><span class="lbl">立監兩院・強化審計影響力</span>適時傳達重大施政議題之審計成果，並強化與立監兩院良好互動</div>
+  </div>
+
+  <div class="card">
+    <h3>數位審計發展架構與推動委員會</h3>
+    <div class="grid2">
+      <div class="minicard"><span class="lbl">人才培育</span>開辦數位審計課程、舉辦創新共識營、公私部門交流</div>
+      <div class="minicard"><span class="lbl">優化組織</span>成立專責單位、成立跨域推動編組（財務、採購、AI審計應用等）</div>
+    </div>
+    <div class="minicard" style="margin-top:.7rem;"><span class="lbl">建構環境（創新應用）</span>開發數位審計工具及模組、建置審核分析系統、導入流程自動化RPA工具</div>
+    <p class="callout" style="margin-top:.9rem;"><b>數位審計發展委員會</b>（召集人：審計長）於<b>111年11月成立</b>，下設推動小組，外聘專家學者<b>共27人</b>，分財務數據分析、採購數據分析、AI審計三大領域。</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">施行細則修正</span>審計法施行細則第4條（115.07.24修正）</h3>
+    <p>審計機關依本法第12條規定，派員赴各機關就地辦理審計事務，或辦理送審機關之抽查審計，<b>得因應業務實際需要，對偏遠地區相同屬性機關，採行定點一併查核</b>，並通知被審核機關檢送相關資料。</p>
+    <p style="font-size:.85rem;color:var(--muted);">修法理由：刪除「其應行審核事項，由審計機關規定之」文字（改以行政規則訂定）；並考量部分機關地處偏遠、所轄機關數眾多，得將相關資料集中至鄰近交通便利地點採行定點查核，聚焦有限資源，落實審計法第12條規定之目的。</p>
+  </div>
+</section>
+
+<!-- ========================= 03 CASES ========================= -->
+<section class="page" id="page-cases">
+  <div class="page-eyebrow">CHAPTER 03</div>
+  <h2 class="page-title">大法官解釋與司法案例</h2>
+  <p class="page-lede">與審計機關職權相關之重要解釋與裁判，聚焦「國營事業認定」「決算最終審定權」「原始憑證定義」與「審計行為之法律性質」四大主軸。</p>
+
+  <div class="card">
+    <h3><span class="tag">釋字第41號</span>44年10月20日・國營事業轉投資之認定</h3>
+    <p>國營事業轉投資於其他事業之資金，應視為政府資本，<b>如其數額超過其他事業資本百分之五十者</b>，該其他事業即屬國營事業管理法第3條第1項第3款之國營事業。</p>
+    <div class="callout"><span class="law-cite">審計法第47條</span>應經審計機關審核之公有營業及事業機關：①政府獨資經營者；②政府與人民合資經營，政府資本超過50%者；③由前二款機關轉投資於其他事業，轉投資資本額超過該事業資本50%者。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">釋字第46號</span>44年5月9日・審計部之決算最終審定權</h3>
+    <p>審計部對於各機關編送之決算有<b>最終審定權</b>。徵收機關核定公營事業之所得額，與審計部審定同一事業之盈餘如有歧異，自應以決算書所載審計部審定之數目為準。</p>
+    <div class="callout"><span class="law-cite">審計法第51條</span>公有營業及事業之盈虧，以審計機關審定數為準。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">釋字第184號</span>72年12月23日・原始憑證不屬於議會得請求提供之資料</h3>
+    <p style="font-size:.86rem;color:var(--muted);">背景：臺北市議會審議70年度決算審核報告時，依審計法第34條及決算法第27條請求提供原始憑證，臺北市審計處認為法條所稱「提供資料」並未明示包括原始憑證，拒絕提出，雙方見解歧異因而聲請解釋。</p>
+    <p>各機關應照會計法及會計制度規定，編製會計報告，連同原始憑證，依限送審計機關審核。所謂<b>「原始憑證」</b>，乃指證明事項經過，而為造具記帳憑證所根據之憑證（會計法第51條第1款、第52條）；各機關人員財務上行為應負之責任，經審定後即解除。</p>
+    <div class="callout">決算法第27條所稱「提供資料」，係指為議審總決算審核報告需要而提供有關審核報告之資料，<b>不包括審計機關依法已審定之原始憑證</b>。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">訴願實務</span>監察院（98）院台訴字第0983210002號訴願決定書</h3>
+    <p>案情：審計部96年10月4日書函告知訴願人軍校年資核算非該部權責，請逕洽國防部說明——屬<b>單純事實之陳述</b>，不因通知而生法律效果，非屬行政處分，不得對之提起訴願。</p>
+    <div class="callout"><span class="law-cite">審計法第3條及第10條</span>審計部及審計人員依法獨立行使審計權，非任何人所得指使、干涉——訴願人請求責成審計部查處國防部，非僅於法無據，亦非訴願救濟範圍事項。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">司法實務</span>最高行政法院112年度抗字第81號裁定</h3>
+    <p>人民本於個人意見向審計機關舉發行政違失之檢舉書，屬<b>建議、舉發的陳情性質</b>，而非「依法申請之案件」。審計機關之回復僅為單純事實敘述及法規制度說明，不具准駁效力，屬<b>觀念通知</b>，並非行政處分。</p>
+    <div class="callout warn">結論：人民對審計機關之回復<b>不得</b>提起訴願及課予義務訴訟。</div>
+  </div>
+
+  <div class="card">
+    <h3>其他重要規定</h3>
+    <p><span class="law-cite">中程計畫預算編製辦法第16條第1項</span>各主管機關應依中程施政計畫（4年）所列使命、願景及關鍵策略目標，研提中長程個案計畫，編製年度施政計畫，規劃年度歲出概算。</p>
+  </div>
+</section>
+
+<!-- ========================= 04 LOCALGOV ========================= -->
+<section class="page" id="page-localgov">
+  <div class="page-eyebrow">CHAPTER 04</div>
+  <h2 class="page-title">地方制度法與釋憲</h2>
+  <p class="page-lede">聚焦地方自治立法權的界線、地方政府間的協力合作機制，以及釋憲／憲法訴訟法對地方自治保障案件之規定。</p>
+
+  <div class="card">
+    <h3><span class="tag">地制法第28條</span>地方自治立法權</h3>
+    <p>下列事項以自治條例定之：</p>
+    <ol>
+      <li>法律或自治條例規定應經地方立法機關議決者</li>
+      <li>創設、剝奪或限制地方自治團體居民之權利義務者</li>
+      <li>關於地方自治團體及所營事業機構之組織者</li>
+      <li>其他重要事項，經地方立法機關議決應以自治條例定之者</li>
+    </ol>
+    <div class="callout">
+      <b>釋字第738號</b>（105.06.24）舉例：在縣轄區從事遙控無人機飛航活動，申請單位與申請人應投保公共意外責任險，並規範應投保範圍及最低金額，得以自治條例或自治規則規範——憲法第110條及地制法第25、28條第2款規定，地方自治團體得就自治事項或依法律授權，以自治條例規範居民權利義務，惟不得抵觸憲法中央與地方權限劃分之規定、法律保留原則及比例原則。
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">地制法第24-1條</span>地方自治團體的協力合作</h3>
+    <ol>
+      <li>直轄市、縣（市）、鄉（鎮、市）為處理跨區域自治事務、促進區域資源利用或增進區域居民福祉，得與其他地方成立<b>區域合作組織、訂定協議、行政契約或以其他方式合作</b>，並報共同上級業務主管機關備查。</li>
+      <li>涉及各該議會、代表會職權者，應經同意。</li>
+      <li>涉及管轄權限移轉或調整者，應制（訂）定、修正自治法規。</li>
+      <li>共同上級業務主管機關對跨區域之建設計畫或合作事項，應優先給予補助或必要協助。</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">憲訴法第七章</span>地方自治保障案件（生效日：111.01.04）</h3>
+    <div class="minicard" style="margin-bottom:.7rem;"><span class="lbl">第82條</span>地方自治團體之立法或行政機關，因行使職權，認所應適用之中央法規範牴觸憲法，對其受憲法所保障之地方自治權有造成損害之虞者，得聲請憲法法庭為宣告違憲之判決（準用第50–54條）。</div>
+    <div class="minicard"><span class="lbl">第83條</span>地方自治團體就下列事項，依法定程序用盡審級救濟而受之不利確定終局裁判，認為損害其受憲法保障之地方自治權者，得聲請憲法法庭為宣告違憲之判決：
+      <ol style="margin-top:.4rem;">
+        <li>自治法規，經監督機關函告無效或函告不予核定</li>
+        <li>其立法機關議決之自治事項，經監督機關函告無效</li>
+        <li>其行政機關辦理之自治事項，經監督機關撤銷、變更、廢止或停止其執行</li>
+      </ol>
+      聲請應於確定終局裁判送達後<b>六個月</b>之不變期間內為之（準用第60、61、62條第1項前段）。
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">釋字第553號</span>自治監督措施的救濟</h3>
+    <p>地制法第83條第1項所定「特殊事故」係<b>不確定法律概念</b>，賦予該管行政機關相當程度之判斷餘地；地方自治團體辦理自治事項與受中央主管機關委辦而辦理之委辦事項，其受監督之密度不同——前者中央之監督僅能就適法性為之，後者除適法性外，亦得就行政作業之合目的性等實施全面監督。</p>
+    <div class="callout">上級監督機關為適法性監督之際，仍應尊重地方自治團體所為合法性判斷餘地，但如其判斷有恣意濫用及其他違法情事，上級監督機關尚非不得依法撤銷或變更。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">111年憲判字第6號</span>萊劑殘留標準之權限爭議案</h3>
+    <p><b>理由要旨</b>：地方自治立法究係僅以其轄區內之人、事、物為規範對象，或已逾此界限而對轄區外之人事物有所規範，除應依地方自治條例規定之文義認定外，<b>亦應考量其規範效果及實際影響</b>。地方自治條例文字表面上縱僅以地方居民或事物為規範對象，然如其規範效果或適用結果對轄區外居民或事物產生直接、密切之實質影響，則應認該自治條例規範內容已超出一縣（市）或一直轄市轄區範圍，而應屬跨地方轄區甚至全國性質之事項，自不應完全交由地方自治團體自行立法並執行。</p>
+    <div class="callout">
+      <b>論理脈絡四步驟：</b>
+      <ol style="margin-top:.4rem;">
+        <li>涉及中央與地方權限劃分爭議時，先探究憲法本文及增修條文是否已有明文規定，或可據以解釋劃分中央與地方間之權限</li>
+        <li>檢視中央法規有無規範及明文授權主管機關另訂安全容許量標準</li>
+        <li>探討自治條例規定是否導致與中央產生權限爭議，屬立法權限或執行權限之劃分？是否屬憲法第111條之未列舉事項？</li>
+        <li>單一國體制下，地方自治團體就自治事項之立法權，仍應受憲法及中央法律之拘束；<b>釋字第738號與本案情形不同，應予區別，難以比附援引其結論</b></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ========================= 05 INTERNAL CONTROL ========================= -->
+<section class="page" id="page-internal-control">
+  <div class="page-eyebrow">CHAPTER 05</div>
+  <h2 class="page-title">內部控制評核</h2>
+  <p class="page-lede">內部控制評核觀念與實務——治理、風險管理及控制流程。內部控制的五大要素必須有效地設計、實施及運行，並以整合方式一起運作，才能使內部控制制度有效。</p>
+
+  <div class="card">
+    <h3>五大要素及十七項原則</h3>
+    <table>
+      <tr><th style="width:34%;">要素</th><th>原則</th></tr>
+      <tr>
+        <td><b>控制環境</b><br>Control Environment</td>
+        <td>
+          1. 管考單位及管理階層應展現對誠信與道德價值之承諾<br>
+          2. 監督單位應監督個體的內部控制制度<br>
+          3. 管理階層應建立組織結構、分派責任、授予職權以達成個體目標<br>
+          4. 管理階層應展現對招募、發展及留任有能力個人之承諾<br>
+          5. 管理階層應評核績效並課予個人之內部控制責任
+        </td>
+      </tr>
+      <tr>
+        <td><b>風險評估</b><br>Risk Assessment</td>
+        <td>
+          6. 管理階層應清楚地確定目標以利辨識及評估與其達成有關之風險<br>
+          7. 管理階層應辨識、分析、及回應與其既定目標達成有關之風險<br>
+          8. 管理階層在辨識、分析及回應上述風險時，應該考量與舞弊、不當付款及資訊安全相關之風險<br>
+          9. 管理階層應辨識、分析、及回應那些會影響內部控制制度之重大變革
+        </td>
+      </tr>
+      <tr>
+        <td><b>控制活動</b><br>Control Activities</td>
+        <td>
+          10. 管理階層應該設計控制活動，以降低個體目標達成之相關風險至可接受水準<br>
+          11. 管理階層應該設計資訊科技之一般控制活動，以降低個體目標達成相關風險至可接受水準<br>
+          12. 管理階層應該執行控制活動，透過政策與程序
+        </td>
+      </tr>
+      <tr>
+        <td><b>資訊與溝通</b><br>Information &amp; Communication</td>
+        <td>
+          13. 管理階層應蒐集或產製攸關、具品質的資訊，並使用它們以支持內部控制制度之有效運作<br>
+          14. 管理階層應對內溝通攸關、具品質的資訊，包括個體目標及內部控制責任，以支持內部控制制度之有效運作<br>
+          15. 管理階層應對適當之外部人士溝通攸關具品質之資訊，關於影響內部控制制度有效運作之重大事項
+        </td>
+      </tr>
+      <tr>
+        <td><b>監督作業</b><br>Monitoring</td>
+        <td>
+          16. 管理階層應建立及運作為監督內部控制制度之監督作業，並評核其結果<br>
+          17. 管理階層應及時改正已辨識之內部控制缺失
+        </td>
+      </tr>
+    </table>
+    <p style="font-size:.82rem;color:var(--muted);">來源：GAO-25-107721。COSO立方體另以「目標類別」（營運／報導／遵循）、「內部控制組成要素」與「組織結構層級」三軸呈現整合關係。</p>
+  </div>
+</section>
+
+<!-- ========================= 06 EVIDENCE ========================= -->
+<section class="page" id="page-evidence">
+  <div class="page-eyebrow">CHAPTER 06</div>
+  <h2 class="page-title">查核發現與審計證據</h2>
+  <p class="page-lede">審計證據之蒐集－實務篇：查核發現之組成要素、審計證據來源、審計技術方法、基本典型審計案例。</p>
+
+  <div class="card">
+    <h3>政府審計系統化流程圖</h3>
+    <div class="stepflow">
+      <div class="step"><span class="n">1</span>審計目標</div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="n">2</span>資訊蒐集</div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="n">3</span>選案</div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="n">4</span>規劃</div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="n">5</span>調查</div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="n">6</span>報告</div>
+      <div class="arrow">→</div>
+      <div class="step"><span class="n">7</span>追蹤</div>
+    </div>
+    <p style="font-size:.85rem;color:var(--muted);">INTOSAI強調課責、透明、治理，對民眾生活產生正面之影響；BSC則用於審計機關策略管理與績效評估。全程以「品質保證」回饋貫穿。選案／規劃階段另運用「技術・方法・創新」；調查階段著重「證據蒐集及評估、查核結論撰擬」；報告階段含內部及外部查核報告；追蹤階段檢討成效改善、期後追蹤事項。</p>
+    <div class="callout">AI工具對應：資訊處開發之審計AI應用程式（Ask Database）支援內網、政府審計整合系統、財務審計、新聞媒體輿情檢索；第五廳「審計AI 2.0全方位審計助理」支援議題識別與規劃；外部則運用多元AI工具，並可用於學術論文、立法院文件搜尋。</div>
+  </div>
+
+  <div class="card">
+    <h3>查核發現之組成要素（四要素）</h3>
+    <div class="grid4">
+      <div class="minicard"><span class="lbl">衡量標準</span>應依循的法規或準則</div>
+      <div class="minicard"><span class="lbl">實際狀況</span>查核當下的實際情形</div>
+      <div class="minicard"><span class="lbl">發生原因</span>造成落差的原因</div>
+      <div class="minicard"><span class="lbl">影響層面</span>造成的具體影響</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>擬議處理意見提要表——查核意見結構分解</h3>
+    <p>查核小組成員完成證據蒐集與分析後，依「查核發現要素」逐項擬具「擬議處理意見提要表」，經領組覆核後，據以撰擬查核報告。表列項目：單位／工作底稿相對應頁碼／審計人員／覆核領組／提陳日期／覆核日期。</p>
+    <p><b>一、查核發現</b>：（一）情況　（二）標準　（三）原因（視情況決定是否適用）　（四）影響（視情況決定是否適用）　（五）支持查核發現之證據類型：<b>證詞性、文件性、實體性、分析性</b>（如機關政策手冊、訪談紀錄等）　（六）支持查核發現之證據來源：<b>觀察、詢問、檢查、其他</b>（如搜尋資料庫、與機關或人員進行訪談、實地觀察等）</p>
+    <p><b>二、查核結論　三、擬議處理意見</b></p>
+    <div class="callout">
+      <b>實例（台電公司停電查核）</b>：【標準】台電公司訂定電力調度要點第7條，可靠度指標含系統平均停電時間及次數。【情況】110年度平均每戶停電時間59.892分鐘、次數1.097次，均較目標值增加（43.192分鐘、0.837次）。【原因】主要係設備製造不良或自然劣化、施工或設計不良，及遭車輛撞擊、外界施工碰觸或鳥獸接觸引起饋線跳脫所致。【查核結論】供電品質尚待改善，亟待檢討妥處。【擬議處理意見】持續於各區域布建電網、定期維護相關設備，並推動電網強韌計畫，汰換老舊設備或線路。
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>審計證據來源（四類）</h3>
+    <ol>
+      <li><b>審計部內網／政府審計整合系統</b>：管考統計、全國機關統計及考核資訊彙總＋政府統計支援審計平台（涵蓋關鍵審計領域相關政府統計／相關政策計畫或評估報告統計／中央部會及地方政府統計資料／國際組織統計資料庫）</li>
+      <li><b>政府資料開放平臺</b>（data.gov.tw）：資料集清單下載專區，提供CSV／XML／JSON下載</li>
+      <li><b>外部評比資料</b>：如財政部國庫署政府公共債務統計表、縣市滿意度調查（遠見、天下等）</li>
+      <li><b>蒐集審計證據越來越艱辛，如何突破？</b>績效審計目的在督促達成目標，若機關人員違失尚非重大、效能過低係制度規章或設施不良所致，宜就興利、建設性或預警性方面提供積極正面查核意見，引導機關採取補正改善措施；另加強訓練課程講授證據蒐集技巧，多善用機關現有資料（如施政計畫或作業管理資訊系統及公務統計資料），減少受查單位困擾</li>
+    </ol>
+    <div class="callout warn">
+      <b>重要區辨</b>：新聞媒體輿情報導係查核議題選案及查核問題之<b>來源</b>，因尚未經審計程序查證並取得佐證資料，<b>故非屬審計證據</b>。
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>隱匿或拒絕提供證據如何處理</h3>
+    <div class="grid2">
+      <div class="minicard"><span class="lbl">政府審計共同規範53</span>審計人員執行查核工作，遇有隱匿或拒絕提供資料，得由領組人員洽請被審核機關長官處理；如仍不提供，應報告該管審計機關，依法辦理。</div>
+      <div class="minicard"><span class="lbl">政府審計共同規範54</span>審計人員遇有被審核機關以機密為由拒絕提供資料，或依事實、法令規定確有無法提供之情由，應請其出具書面資料，說明理由、事實或相關依據，並列入查核報告。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>審計意見撰擬原則（歷次部務會報／審計會議重點）</h3>
+    <ul>
+      <li>撰擬意見應注意<b>公正、客觀</b>，針對事情本質探討，就事論事，依證據提出意見，<b>避免主觀判斷</b>；遇選舉期間等敏感時期，宜注意立論中立客觀，避免使用批判性用語，並注意審計證據嚴謹性</li>
+      <li>與受查單位溝通應<b>秉持同理心</b>、理直氣和、義正詞婉；目的為協助機關提升施政效能與防範疏忽，態度強硬易引發防衛心理，影響審計效果</li>
+      <li>根本原因分析：應參酌內部稽核協會（IIA）「國際專業實務架構（IPPF）」根本原因分析（2320-2）規定，及美國聯邦審計署（GAO）「美國政府審計準則」（GAGAS-6.74），深入查究數據或結果所呈現問題之癥結所在，避免僅依個別統計數據或執行結果表象即遽下結論</li>
+      <li>引用統計資料應注意<b>查對與中央主管部會統計數據之一致性與正確性</b>，以強化論述基礎，確保審計證據嚴謹性</li>
+      <li>善用多元社會科學研究方法及資訊科技（地理資訊、巨量資料分析、統計、文字探勘等軟體工具），蒐集適切審計證據，針對潛在風險事項前瞻提出預警性意見</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= 07 TECHTOOLS ========================= -->
+<section class="page" id="page-techtools">
+  <div class="page-eyebrow">CHAPTER 07</div>
+  <h2 class="page-title">數位分析與AI工具</h2>
+  <p class="page-lede">審計工作的變革：資訊科技與Big Data。過去→現在：數位分析能力；現在→未來：使用AI能力。</p>
+
+  <div class="card">
+    <h3>近3年度審計機關運用數位分析技術工具</h3>
+    <table>
+      <tr><th>年度</th><th>查核項數</th><th>EXCEL</th><th>GIS</th><th>POWER BI</th><th>Python</th><th>Arbutus</th><th>數位審計模組</th><th>其他</th></tr>
+      <tr><td><b>合計</b></td><td>5,352</td><td>3,375（63.06%）</td><td>708（13.23%）</td><td>53（0.99%）</td><td>309（5.77%）</td><td>310（5.79%）</td><td>107（2.00%）</td><td>490（9.16%）</td></tr>
+      <tr><td>114</td><td>1,897</td><td>1,184</td><td>217</td><td>10</td><td>166</td><td>92</td><td>58</td><td>170</td></tr>
+      <tr><td>113</td><td>1,814</td><td>1,148</td><td>227</td><td>15</td><td>90</td><td>110</td><td>49</td><td>175</td></tr>
+      <tr><td>112</td><td>1,641</td><td>1,043</td><td>264</td><td>28</td><td>53</td><td>108</td><td>－</td><td>145</td></tr>
+    </table>
+    <p style="font-size:.8rem;color:var(--muted);">資料來源：審計統計資料查詢系統資料整理。</p>
+  </div>
+
+  <div class="card">
+    <h3>審計技術方法－總結</h3>
+    <p><b>（一）績效審計技術方法</b></p>
+    <ol>
+      <li>分析技術：質化分析、量化分析、數位分析</li>
+      <li>審計模組：數位審計、採購資訊分析、績效審計法令、社會科學技術</li>
+    </ol>
+    <p><b>（二）常用數位分析技術</b></p>
+    <ol>
+      <li>運用機關資料庫及數據分析技術</li>
+      <li>運用地理資訊系統 GIS 或圖資（如QGIS、SPSS、Google Map、內政部不動產資訊平臺、經濟部中央地質調查所土壤液化潛勢區圖資）</li>
+      <li>運用 <b>GBA／CBA／AIS／NBA／PBA／TBA</b> 系統資訊</li>
+    </ol>
+    <p><b>（三）</b>參採國內外查核（研究）報告（如GAO判定高風險項目作業指南、英國NAO及歐盟審計院審計案例）</p>
+    <p><b>（四）</b>新興運用本部或外部開發之AI程式工具</p>
+    <div class="callout">GBA／CBA審核分析系統應用實例：就中央及地方政府各機關傳送之會計資訊檔案，針對「受款人異常關聯」作跨機關、跨資料庫審核分析，屬善用資訊科技、創新查核技術方法之案例。</div>
+  </div>
+
+  <div class="card">
+    <h3>數位審計人才培育：多元AI工具對應審計三階段</h3>
+    <p>單一工具 &gt; 多元工具；不同審計情境，搭配不同AI能力。</p>
+    <table>
+      <tr><th>階段</th><th>工具</th><th>用途</th></tr>
+      <tr><td>①選案規劃</td><td>Gemini Deep Research／ChatGPT</td><td>發想與研究主題方向、蒐集資訊、初步分析</td></tr>
+      <tr><td>②調查執行、訪談</td><td>Perplexity AI／Gemini Live</td><td>深入調查與即時問答、訪談輔助、資訊驗證</td></tr>
+      <tr><td>③報告產出</td><td>NotebookLM</td><td>整理重點與建構脈絡、彙整資料、生成報告</td></tr>
+    </table>
+    <p style="font-size:.85rem;color:var(--muted);">常見多元AI工具：Gemini、ChatGPT、Perplexity、Gemini Live、NotebookLM。</p>
+  </div>
+
+  <div class="card">
+    <h3>運用AI程式工具應注意事項</h3>
+    <div class="callout warn">
+      審計同仁運用各類型AI工具輔助查核，能大幅提升資料分析效率與異常偵測能力，惟應注意：<b>資料安全</b>、<b>道德風險</b>與<b>公務機密維護</b>；確保查核證據的「<b>可解釋性</b>」與「<b>軌跡留存</b>」，<b>避免直接引用AI生成之結論與意見</b>；撰擬審計意見仍應保有<b>專業判斷力</b>，並注意審計專業用語，以確保審計公信力。
+    </div>
+    <p style="margin-top:.8rem;font-style:italic;color:var(--muted);">「AI不會取代人類，但不（會）用AI的人會被使用AI的人取代。」——哈佛商學院教授 卡林・拉哈尼（Karim Lakhani）</p>
+  </div>
+</section>
+
+<!-- ========================= 08 WORKPAPER ========================= -->
+<section class="page" id="page-workpaper">
+  <div class="page-eyebrow">CHAPTER 08</div>
+  <h2 class="page-title">查核工作底稿規範</h2>
+  <p class="page-lede">查核工作底稿之內容、製作注意事項、覆核責任與歸檔時間。</p>
+
+  <div class="card">
+    <h3>工作底稿四大內容</h3>
+    <div class="grid4">
+      <div class="minicard"><span class="lbl">1・封面</span>抽查機關名稱、抽查工作底稿及附件說明</div>
+      <div class="minicard"><span class="lbl">2・目錄</span>序號、查核項目、查核人、工作底稿頁碼（起訖號）、附件編號</div>
+      <div class="minicard"><span class="lbl">3・查核紀錄</span>查核目的、查核依據、查核結果等</div>
+      <div class="minicard"><span class="lbl">4・相關佐證資料</span>支持查核紀錄之證據文件</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>製作注意事項 － 查核紀錄應記載內容</h3>
+    <ol>
+      <li>受查單位名稱</li>
+      <li>查核項目</li>
+      <li>查核期間</li>
+      <li>查核程序、經過及發現</li>
+      <li>查核意見（擬議處理意見）</li>
+      <li>查核及領組人員簽章及日期</li>
+      <li>索引</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>製作注意事項 － 佐證資料</h3>
+    <ol>
+      <li>資料來源</li>
+      <li>資料取得日期</li>
+      <li>視需要由提供者簽註日期及簽名或蓋章</li>
+      <li>依重要性原則列為查核紀錄之佐證資料</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>製作注意事項 － 標示索引</h3>
+    <ol>
+      <li>查核紀錄應標示索引號碼，並於每頁下方中間位置表達，佐證資料應隨附於其後</li>
+      <li>查核紀錄內容、數據應與佐證資料相互勾稽</li>
+      <li>佐證資料亦應標示索引號碼，並與查核紀錄內容交叉索引</li>
+    </ol>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>製作時機</h3>
+      <p style="font-size:1.1rem;font-weight:700;color:var(--gold);">及時為之</p>
+    </div>
+    <div class="card">
+      <h3>不列入工作底稿</h3>
+      <ul>
+        <li>和報告無關</li>
+        <li>作廢不要</li>
+        <li>缺漏不完整</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>查核範圍受限之處理</h3>
+    <ol>
+      <li>如受法令規定、查核範圍限制、取得文件受限或其他事件影響，致未能遵循本部訂頒之各類審計作業規定時，應於工作底稿<b>記錄其情形、影響程度及結論</b></li>
+      <li>如認為應遵循之規定不適用，應記錄不適用之原因，並經<b>該案件科（課）長之核准</b></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>機密及機敏資料處理</h3>
+    <ol>
+      <li>取得機關機密或個人隱私資料，不論紙本或電子文件，均應<b>以機密文書處理</b></li>
+      <li>列入查核工作底稿時，應依機密等級<b>分別製作機密卷</b>查核工作底稿，並注意依機密文書處理相關法令規定辦理</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>領組之覆核責任</h3>
+    <p>領組人員於查核期間，對查核小組成員編製之查核工作底稿（含附件），應<b>詳為覆核</b>，並於查核紀錄簽註日期及簽名或蓋章。</p>
+    <p style="font-size:.85rem;color:var(--muted);margin-top:.6rem;"><b>覆核之項目（節錄自「查核工作底稿品質覆核檢查表」14項）</b>：抽查紀錄應記載之要件是否完整；查核工作底稿之索引是否明確；是否已記載重大事項之專業判斷；受查單位所提各式表格是否執行遺當之查核程序；抽查紀錄與其附件是否可以勾稽且數據均有所連繫；查核證據是否足夠適切，並支持審計人員之意見；審計人員之意見是否適當；查核工作底稿是否遍歷齊整，且無遺漏情事；查核工作底稿是否納入所有（個別）抽（調）查計畫中所列應查核項目之抽查紀錄；抽（調）查報告書所列查核意見與查核工作底稿是否相符；抽（調）查報告書內容相關部分是否前後勾稽相符；機敏文件之利用與安全維護是否符合相關法令規定；抽（調）查報告書核定後，查核紀錄相關內容及索引是否配合修正；查核工作底稿之電子文件是否列印紙本並妥善繫存。</p>
+  </div>
+
+  <div class="card">
+    <h3>單位副主管之確認責任</h3>
+    <ol>
+      <li>抽（調）查報告核定後，應由各審計單位副主管確認查核工作底稿<b>已彙整完成</b>，並在查核工作底稿封面上簽註日期及簽名或蓋章</li>
+      <li>經各審計單位副主管簽註之查核工作底稿內容，<b>不得增刪或修改</b></li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>查核工作底稿之歸檔時間</h3>
+    <ol>
+      <li>每一查核案件應<b>單獨建立</b>查核工作底稿</li>
+      <li>經彙整完成之查核工作底稿（包含由電子文件列印之紙本或燒錄之光碟），應於抽（調）查報告核定後，<b>併同報告歸檔</b></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ========================= 09 EDATA ========================= -->
+<section class="page" id="page-edata">
+  <div class="page-eyebrow">CHAPTER 09</div>
+  <h2 class="page-title">電子資料檔案管理</h2>
+  <p class="page-lede">審計機關運用各機關電子資料檔案，須遵循嚴格的最少化取得、通報登錄與銷毀期限規定。</p>
+
+  <div class="card">
+    <h3><span class="tag">112.10.17生效</span>審計機關運用各機關電子資料檔案管理要點</h3>
+    <ul>
+      <li><b>電子資料檔案之定義</b>（第二點）：依審計法第14條及相關法令規定，自各機關取得之<b>非公開電子資料檔案</b></li>
+      <li><b>最少化原則</b>（第四點）：電子資料欄位以<b>最少化及必要性</b>為原則，不得移作其他用途；非抽（調）查工作有關人員，不得探悉或持有相關資料</li>
+      <li><b>通報登錄</b>（第五點（四））：審計人員應於取得機關提供電子資料檔案後 <span class="deadline">14個工作日內</span>，至審計機關運用各機關電子資料檔案管理系統進行通報單登錄作業，並依系統流程逐級完成通報</li>
+      <li><b>禁止複製</b>（第五點（一））：取得各機關之電子資料檔案，<b>禁止複製或儲存於非公務用資訊設備</b></li>
+      <li><b>歸檔與去識別化</b>（第六點（三））：運用各機關電子資料檔案產生之查核工作底稿，應納入抽（調）查案卷歸檔。查核工作底稿屬個人資料欄位應<b>去識別化處理</b>，未能去識別化處理者，相關工作底稿應依一般公務<b>機密文書處理</b>規定辦理</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>非公開電子資料轉錄與銷毀流程（廉政業務）</h3>
+    <ul>
+      <li><b>限時通報轉錄</b>：必須在取得資料後 <span class="deadline">14個工作日</span> 於系統進行通報單登錄作業</li>
+      <li><b>目的結束即銷毀</b>：使用目的結束後必須進行徹底銷毀，並留存<b>銷毀佐證紀錄</b>（如銷毀畫面之截圖）</li>
+      <li><b>限期通報銷毀</b>：銷毀資料後，必須在 <span class="deadline">7個工作日</span> 內上系統登錄，並上傳銷毀佐證紀錄</li>
+      <li><b>長期保留例外</b>：業務上若有長期保留必要（逾一年），必須簽報單位主管核准方得延長存管，且需定期檢視</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= 10 ETHICS ========================= -->
+<section class="page" id="page-ethics">
+  <div class="page-eyebrow">CHAPTER 10</div>
+  <h2 class="page-title">利益衝突與廉政倫理</h2>
+  <p class="page-lede">公職人員利益衝突迴避法、公務員廉政倫理規範及其他相關廉政業務規定。</p>
+
+  <div class="card">
+    <h3><span class="tag">公職人員利益衝突迴避法</span>例外允許補助或交易</h3>
+    <ol>
+      <li>依政府採購法以公告程序或同法第105條辦理之採購</li>
+      <li>依法令規定經由公平競爭方式，以公告程序辦理之採購、標售、標租或招標設定用益物權</li>
+      <li>基於法定身分依法令規定申請之補助；或對公職人員之關係人依法令規定以公開公平方式辦理之補助，或禁止其補助反不利於公共利益且經補助法令主管機關核定同意之補助</li>
+      <li>交易標的為公職人員服務或受其監督之機關團體所提供，並以公定價格交易</li>
+      <li>公營事業機構執行國家建設、公共政策或為公益用途申請承租、承購、委託經營、改良利用國有非公用不動產</li>
+      <li>一定金額以下之補助及交易</li>
+    </ol>
+    <div class="callout">
+      <b>揭露身分義務（§14Ⅱ）</b>：補助或交易行為<b>前</b>，主動於申請或投標文件內表明身分關係；補助或交易行為<b>後</b>，該機關團體應連同其身分關係主動公開。
+      <ul style="margin-top:.5rem;">
+        <li>機關團體於採購案決標前或補助案核定前，允許採購廠商或補助申請對象<b>補正身分揭露表</b></li>
+        <li>於決標後或補助案核定後始表示漏未填寫揭露表者，係違反第14條第2項規定——依<b>第18條第3項</b>，處<b>5萬元以上50萬元以下</b>罰鍰，得按次處罰（法務部108年3月22日法廉字第10805002150號函）</li>
+        <li>依政府採購法公告程序辦理者，無違反第14條第1項交易禁止規定；違反<b>事前</b>揭露義務者，<b>並不影響</b>其投標廠商資格，惟另依第18條第3項處罰</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="tag">公務員廉政倫理規範</span>與職務有利害關係之定義</h3>
+    <p style="font-size:.85rem;color:var(--muted);">指個人、法人、團體或其他單位與本機關（構）或所屬機關（構）間，具有下列情形之一者：</p>
+    <ol>
+      <li>業務往來</li>
+      <li>指揮監督</li>
+      <li>費用補（獎）助</li>
+      <li>正在尋求、進行或已訂立承攬、買賣或其他契約關係</li>
+      <li>其他因本機關（構）或所屬機關（構）業務之決定、執行或不執行，將遭受有利或不利之影響</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>涉密人員出入境管制規定</h3>
+    <ul>
+      <li><b>事前申請</b>：涉密人員出境（含公務考察及私旅），均須於出境 <span class="deadline">20日前</span> 檢具行程等書面資料提出申請，經機關首長核准後始得前往</li>
+      <li><b>返臺通報</b>：返臺後負有法定通報義務，須於返臺後 <span class="deadline">7個工作日內</span>，填具返臺通報表送交政風室備查</li>
+      <li><b>法規依據</b>：《國家機密保護法》§26及施行細則§32</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>公務員赴陸申請、通報與定期抽查機制</h3>
+    <ul>
+      <li><b>赴陸申請與通報</b>：簡任第十職等以下未涉密之適用公務員服務法同仁，赴陸仍須於行前向機關申請並經首長核准；返臺後亦須於 <span class="deadline">7個工作日內</span> 填具通報表送政風室備查</li>
+      <li><b>定期抽查機制</b>（全面勾稽）：
+        <ol>
+          <li>政風室每年將抽出<b>不低於2%</b>的同仁</li>
+          <li>函請內政部移民署調閱前一年度入出境紀錄，與差勤系統全面比對</li>
+          <li>隱匿未報或違規逕自赴陸者將面臨<b>行政處分</b></li>
+        </ol>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========================= QUIZ ========================= -->
+<section class="page" id="page-quiz">
+  <div class="page-eyebrow">SELF TEST</div>
+  <h2 class="page-title">題庫測驗</h2>
+  <p class="page-lede">共 52 題，涵蓋預算法、會計法、政府採購法及地方總決算審核報告審編。點選選項作答，答對／答錯皆會顯示法條依據解析。</p>
+
+  <div class="quiz-controlbar">
+    <div class="quiz-score">
+      <div class="tally">已作答 <b id="answeredCount">0</b> / <span id="totalCount">0</span>　答對 <b id="correctCount">0</b> 題</div>
+      <button class="reset-btn" id="resetQuizBtn">重新測驗</button>
+    </div>
+    <div class="filterrow" id="filterRow"></div>
+  </div>
+
+  <div id="quizList"></div>
+</section>
+
+
+
+    </div>
+  </main>
+</div>
+
+<script>
+
+/* ---------- Wrap tables for horizontal scroll on small screens ---------- */
+document.querySelectorAll('table').forEach(function(t){
+  var wrap = document.createElement('div');
+  wrap.className = 'table-scroll';
+  t.parentNode.insertBefore(wrap, t);
+  wrap.appendChild(t);
+});
+
+/* ---------- Navigation ---------- */
+var navlinks = document.querySelectorAll('.navlink, .home-link');
+var pages = document.querySelectorAll('.page');
+var sidebar = document.getElementById('sidebar');
+var backdrop = document.getElementById('backdrop');
+var hamburgerBtn = document.getElementById('hamburgerBtn');
+
+function goPage(id){
+  pages.forEach(function(p){ p.classList.remove('active'); });
+  var target = document.getElementById('page-' + id);
+  if(target){ target.classList.add('active'); }
+  document.querySelectorAll('.navlink').forEach(function(n){
+    n.classList.toggle('active', n.getAttribute('data-page') === id);
+  });
+  window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+  closeSidebar();
+  history.replaceState(null, '', '#' + id);
+}
+
+navlinks.forEach(function(el){
+  el.addEventListener('click', function(){
+    var id = el.getAttribute('data-page');
+    if(id) goPage(id);
+  });
+});
+
+function openSidebar(){ sidebar.classList.add('open'); backdrop.classList.add('show'); }
+function closeSidebar(){ sidebar.classList.remove('open'); backdrop.classList.remove('show'); }
+hamburgerBtn.addEventListener('click', function(){
+  sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+});
+backdrop.addEventListener('click', closeSidebar);
+
+/* initial route */
+(function(){
+  var hash = (location.hash || '').replace('#','');
+  if(hash && document.getElementById('page-'+hash)){
+    goPage(hash);
+  }
+})();
+
+/* ---------- Quiz ---------- */
+var QUIZ_DATA = [{"id": 0, "cat": "預算法", "q": "下列何者最能說明「預算」與「決算」的差別？", "opts": ["預算是事前規劃，決算是事後執行結果", "預算是事後結果，決算是事前規劃", "兩者完全相同", "預算只記收入，決算只記支出"], "a": 0, "exp": "依《預算法》第2條規範，預算係指政府於每一會計年度內，經法定程序認可之歲入與歲出之預計數，性質屬事前籌劃與目標規劃；決算則是會計年度結束後，針對該年度歲入歲出實際執行狀況所陳報之最終報告，屬事後執行結果之核實審核。"}, {"id": 1, "cat": "預算法", "q": "依《預算法》的分類，下列何者屬於「歲入」？", "opts": ["政府發放員工薪資", "政府興建辦公廳舍的支出", "政府依法收取的稅課收入", "政府償還債務本金"], "a": 2, "exp": "依《預算法》第6條規定，稱歲入者，謂一會計年度之一切收入（債務之舉借及以前年度歲計賸餘之移用不在此限）。政府依法收取之稅課收入屬經常性公權力收入，為典型歲入；A、B屬歲出支出，D屬債務償還非屬歲入。"}, {"id": 2, "cat": "預算法", "q": "依預算法第4條規定歲入之供一般用途者為何種基金？", "opts": ["特種基金", "普通基金", "營業基金", "信託基金"], "a": 1, "exp": "依《預算法》第4條第1項規定：「歲入之供一般用途者，為普通基金。」凡不限定特定用途、由政府統籌支用之歲入均納入普通基金；經指定特定用途者則屬特種基金。"}, {"id": 3, "cat": "預算法", "q": "下列何者屬中央政府之營業基金？", "opts": ["行政院", "內政部", "中央警察大學", "台灣電力股份有限公司"], "a": 3, "exp": "依《預算法》第4條第1項第2款第1目規定，特種基金中「供營業循環運用者，為營業基金」。台灣電力股份有限公司屬國營事業，以營利或自主營運為目的，屬營業基金；行政院、內政部及中央警察大學皆屬公務機關。"}, {"id": 4, "cat": "預算法", "q": "公務人員因公在國內出差時，下列何者正確？", "opts": ["不得報支任何費用", "得依規定報支差旅費", "只能報支住宿費", "只能報支交通費"], "a": 1, "exp": "依預算執行規範與《國內出差旅費報支要點》，公務人員因公出差者，得依相關法令規定核實報支交通費、住宿費及雜費等差旅費。"}, {"id": 5, "cat": "預算法", "q": "預算案經立法院審議通過，並經總統公布後，稱為什麼？", "opts": ["預算草案", "臨時預算", "法定預算", "特別預算"], "a": 2, "exp": "依《預算法》第2條第3項規定：「經立法院議決之歲入、歲出預算，稱法定預算。」預算案經立法院審議通過並經總統公布後，即具法律效力，稱為法定預算。"}, {"id": 6, "cat": "預算法", "q": "政府機關原本編列100萬元購買設備，預算經法定程序審議通過後，原則上應如何辦理？", "opts": ["機關可以任意改成其他用途", "應依預算所定用途執行", "首長可以直接拿去補助私人", "只要沒有超過100萬元，用途不受限制"], "a": 1, "exp": "依《預算法》第25條及第62條規定，各機關應按歲出分配預算嚴格執行，各計畫或業務科目之經費，應依預算所定用途執行，不得任意變更用途或移作他用。"}, {"id": 7, "cat": "預算法", "q": "依《預算法》第17條規定，預算以何者為一期？", "opts": ["一個月", "一季", "一會計年度", "三個會計年度"], "a": 2, "exp": "依《預算法》第17條規定：「預算以一會計年度為一期。」此即預算制度上之「會計年度獨立原則」。"}, {"id": 8, "cat": "預算法", "q": "依政府預算法第五條規定，經費按其得支用期間之規定，以下哪些敘述為正確？", "opts": ["歲定經費，以一會計年度為限", "繼續經費，依設定之條件或期限，分期繼續支用", "法定經費，依設定之條件，於法律存續期間按年支用", "以上皆為正確"], "a": 3, "exp": "依《預算法》第5條規定，經費依得支用期間分為：歲定經費（以一會計年度為限）、繼續經費（依條件或期限分期繼續支用）、法定經費（依法律存續期間按年支用）。故(A)(B)(C)選項均符合法條內容。"}, {"id": 9, "cat": "預算法", "q": "預算法第十條規定，以下哪些敘述為正確？", "opts": ["歲入、歲出預算，按其收支性質分為經常門、資本門", "歲入除減少資產及收回投資為資本收入應屬資本門外，均為經常收入應列經常門", "歲出除增置或擴充、改良資產及增加投資為資本支出應屬資本門外，均為經常支出應列經常門", "以上皆為正確"], "a": 3, "exp": "依《預算法》第10條第1項至第3項條文，歲入資本門限於減少資產及收回投資，歲出資本門限於增置、擴充、改良資產及增加投資，其餘均列經常門。故(A)(B)(C)皆正確。"}, {"id": 10, "cat": "預算法", "q": "關於預算法第63條之經費「流用」限制與規範，下列何者符合法律規定？", "opts": ["人事費（用人費）預算不足時，得隨時自業務費流用補充", "經立法院審議時已被刪減之預算項目，事後得透過機關內部流用補足", "同一業務計畫下之不同用途別科目，在流入或流出不超過原預算20%之限制下得辦理流用", "不同業務計畫之間，機關首長得自由核准經費互相流用"], "a": 2, "exp": "依《預算法》第63條規定，同一計畫或業務科目下之用途別科目經費不足得辦理流用，但流入或流出數額均不得超過原預算數額20%。且非經立法院同意，不得流用為用人經費，且不得流用補足經立法院審議刪除或刪減之預算數額，流用僅限同一業務計畫內部，不得跨計畫流用。"}, {"id": 11, "cat": "預算法", "q": "關於第一預備金與第二預備金之比較，下列何者正確？", "opts": ["第一預備金編列於總預算；第二預備金編列於各機關單位預算", "第一預備金動支額度不得超過經常支出之1%，由機關首長核准動支；第二預備金編列於總預算，動支超過5000萬元須送立法院備查", "第二預備金僅能用於重大天然災害救災，不得用於計畫修改或業務量增加", "動支第二預備金後編具之「動支數額表」，送立法院僅供備查，法律嚴禁立法院進行審議"], "a": 1, "exp": "依《預算法》第22條，第一預備金於公務機關單位預算中設定之，按經常支出總額1%為限；第二預備金編列於總預算。依《預算法》第70條規定，第二預備金動支每筆超過新臺幣5,000萬元者，應先送立法院備查。"}, {"id": 12, "cat": "預算法", "q": "依照預算法規定，各機關動支預備金，其每筆數額超過5千萬元者，應先送何機關備查？", "opts": ["立法院", "行政院", "行政院主計總處", "主管機關"], "a": 0, "exp": "依《預算法》第70條明定：「動支第二預備金，每筆數額超過新臺幣五千萬元者，應先送立法院備查。」"}, {"id": 13, "cat": "預算法", "q": "各機關之歲出分配預算，其計畫或業務科目之各用途別科目中有一科目之經費不足，而他科目有賸餘時，得辦理流用，但不得流用為下列何者？", "opts": ["交通經費", "用人經費", "水電經費", "業務經費"], "a": 1, "exp": "依《預算法》第63條但書規定，經費流用「非經立法院同意，不得流用為用人經費」。因此未經立法院同意，絕對不得流用為用人經費（人事費）。"}, {"id": 14, "cat": "會計法", "q": "會計憑證的主要作用為何？", "opts": ["作為記帳的依據", "作為娛樂用途", "作為廣告用途", "作為私人日記"], "a": 0, "exp": "依《會計法》第51條規定，會計憑證係用以證明會計事項之經過，並作為記載帳簿（記帳）之法定依據。"}, {"id": 15, "cat": "會計法", "q": "《會計法》的主要目的為何？", "opts": ["規範政府機關的會計制度", "規範私人公司的行銷活動", "規範學校的教學內容", "規範一般民眾的日常生活"], "a": 0, "exp": "依《會計法》第1條規定：「政府及其所屬機關會計事務之處理，依本法之規定。」旨在建立制度，規範政府機關會計事務之處理與內部審核。"}, {"id": 16, "cat": "會計法", "q": "下列何者屬於會計制度的重要目的？", "opts": ["正確記錄及表達會計事項", "增加員工休假", "決定人員升遷", "安排機關活動"], "a": 0, "exp": "建立會計制度之主要目的，在於使政府會計事項能獲得完整、系統化且正確之記錄與合理表達，以供決策與監督。"}, {"id": 17, "cat": "會計法", "q": "會計資料及相關憑證應如何處理較為適當？", "opts": ["依規定整理及保存", "使用後立即全部銷毀", "由承辦人自行帶回家", "不需要保存"], "a": 0, "exp": "依《會計法》第83條及第84條，會計憑證、帳簿及財務報告均屬法定公務檔案，必須依規定妥善整理保存至法定年限，不得任意銷毀或私自攜離。"}, {"id": 18, "cat": "會計法", "q": "依會計法規定，屆滿保存年限之會計憑證，經該管上級機關與下列何機關同意後，得予銷毀？", "opts": ["主計機關", "審計機關", "財政機關", "檔案管理機關"], "a": 1, "exp": "依《會計法》第83條規定，會計憑證自決算程序辦理終結之日起至少保存五年，屆滿年限後須經該管上級機關與「該管審計機關」同意始得銷毀。"}, {"id": 19, "cat": "會計法", "q": "依《會計法》第6條規定，政府會計種類不包括下列何者？", "opts": ["總會計", "單位會計", "附屬單位會計", "管理會計"], "a": 3, "exp": "依《會計法》第6條規定，政府會計分為：總會計、單位會計、附屬單位會計、分會計、附屬單位會計之分會計等五種。並不包含商業企業層面之「管理會計」。"}, {"id": 20, "cat": "會計法", "q": "政府的會計年度為何？", "opts": ["1月1日至12月31日", "4月1日至隔年3月31日", "7月1日至隔年6月30日", "依各機關自行決定"], "a": 0, "exp": "依《會計法》第4條：「會計年度之開始及終了，依預算法之規定。」《預算法》第12條明定會計年度採曆年制（每年1月1日至12月31日）。"}, {"id": 21, "cat": "會計法", "q": "會計憑證主要分為哪兩類？", "opts": ["收入憑證、支出憑證", "原始憑證、記帳憑證", "正式憑證、臨時憑證", "紙本憑證、電子憑證"], "a": 1, "exp": "依《會計法》第51條明確規定：「會計憑證分為下列二類：一、原始憑證。二、記帳憑證。」"}, {"id": 22, "cat": "會計法", "q": "政府會計年度之起訖係採何者？", "opts": ["曆年制", "三月制", "七月制", "八月制"], "a": 0, "exp": "依《預算法》第12條與《會計法》第4條，我國政府會計年度劃分採取「曆年制」（1月1日至12月31日）。"}, {"id": 23, "cat": "會計法", "q": "依《會計法》規定，下列何者屬於會計人員的職責？", "opts": ["決定機關政策", "辦理會計事務", "核定機關人事任用", "執行機關採購業務"], "a": 1, "exp": "依《會計法》第95條，會計人員專責辦理單位內之會計事務與內部審核，不得兼任或干預機關政策決定、人事任用或業務採購。"}, {"id": 24, "cat": "會計法", "q": "依政府會計法第十八條規定，以下哪些敘述為錯誤？", "opts": ["中央總會計制度之設計、核定，由中央主計機關為之", "地方政府之總會計制度及各種會計制度之一致規定，由各該政府之主計機關設計，呈經上級主計機關核定頒行", "各機關之會計制度，由各該機關之會計機構設計，簽報所在機關長官後，呈請各該政府之主計機關核定頒行", "上述會計制度設計，業經相關主計機關核定頒行，無須與該管審計機關會商"], "a": 3, "exp": "依《會計法》第18條規定，各級會計制度之設計與核定，均應「會商該管審計機關」後始得為之。故(D)選項主張「無須會商審計機關」屬嚴重錯誤。"}, {"id": 25, "cat": "會計法", "q": "依政府會計法第六十四條規定，各機關或基金應辦理結帳或結算，下列何者為錯誤?", "opts": ["會計年度結束期間", "有每月、每季或每半年結算一次之必要者，其每次結算時", "經機關首長或上級單位認為有必要時", "機關裁撤或基金結束時"], "a": 2, "exp": "依《會計法》第64條，法定結帳或結算事由僅限：會計年度結束時、機關裁撤或基金結束時、有定期結算必要時、其他依法規定者。並不包含「經首長隨意認為有必要時」，故(C)錯誤。"}, {"id": 26, "cat": "會計法", "q": "關於政府機關會計憑證、帳簿及報表之保管與銷毀規範，下列敘述何者完全正確？", "opts": ["各種會計憑證自決算編製完成後，至少應保存1年，屆滿即可由機關自行銷毀", "會計憑證保管期限屆滿後若欲銷毀，必須報經上級機關及該管審計機關（審計部）同意", "單位會計之帳簿與報表應保存20年，總會計則保存10年", "涉及債權債務之會計憑證，亦一律受2年保存期限之限制，屆期必須銷毀"], "a": 1, "exp": "依《會計法》第83條，會計憑證自決算終結日起至少保存五年；保存期限屆滿後欲銷毀者，必須報經該管上級機關及該管審計機關同意。"}, {"id": 27, "cat": "會計法", "q": "當主辦會計人員發現機關首長強行命令執行不合法之會計程序或憑證時，依據《會計法》第99條規定，下列處理程序何者正確？", "opts": ["僅需口頭向首長報告，若首長堅持執行即可直接配合開具付款憑單", "應先請求更正，若首長仍堅持執行，應以書面聲明異議並向上級機關首長及主計機關報告", "直接向檢調機關告發首長，無需辦理內部更正或異議程序", "主辦會計若未為書面聲明異議，出事後僅承擔行政處分，不負刑事連帶責任"], "a": 1, "exp": "依《會計法》第99條，主辦會計人員對於不合法之會計程序，應先請求更正；如不獲更正，應以書面聲明異議；若長官仍強行命令執行，應將異議書呈報該管上級機關長官及主計機關，始得免負責任。"}, {"id": 28, "cat": "會計法", "q": "依會計法相關規定，下列敘述何者錯誤？", "opts": ["會計年度之開始及終了，是依「預算法」之所定", "會計人員執行之內部審核，其範圍包含財務審核、財物審核、工作審核", "地方政府之總會計制度及各種會計制度之一致規定，由地方政府主計機關設計，呈經上級主計機關核定頒行", "各種會計憑證保存屆滿三年後，除有關債權、債務者外，經該管上級機關與該管審計機關之同意，得予銷毀"], "a": 3, "exp": "依《會計法》第83條，會計憑證至少應保存「五年」（非三年），且涉及債權債務者不得銷毀。故(D)記載「三年」係屬錯誤。"}, {"id": 29, "cat": "會計法", "q": "下列何者不是總會計？", "opts": ["直轄市之會計", "村里之會計", "鄉（鎮、市）之會計", "直轄市山地原住民區之會計"], "a": 1, "exp": "依《會計法》第7條，總會計係指政府之會計（含中央、直轄市、縣市、鄉鎮市及山地原住民區等公法人）。「村里」僅為地方自治機關下設之基層行政編組，非公法人亦無獨立預算，故不設總會計。"}, {"id": 30, "cat": "政府採購法", "q": "下列何者非公告金額以上採購案招標方式？", "opts": ["公開招標", "選擇性招標", "限制性招標", "公開取得"], "a": 3, "exp": "依《政府採購法》第18條，法定招標方式分為公開招標、選擇性招標及限制性招標。「公開取得書面報價或企劃書」係依同法第49條專用於未達公告金額採購之招標型態，非屬公告金額以上之招標方式。"}, {"id": 31, "cat": "政府採購法", "q": "公告金額十分之一以下(小額採購)金額是指？", "opts": ["10萬元", "15萬元", "50萬元", "100萬元"], "a": 1, "exp": "依公共工程委員會現行公告，中央機關公告金額為新臺幣150萬元；依《中央機關未達公告金額採購招標辦法》第5條，公告金額十分之一以下即為新臺幣15萬元以下之小額採購。"}, {"id": 32, "cat": "政府採購法", "q": "下列何者非屬政府採購行為錯誤態樣？", "opts": ["標封封口未蓋騎縫章，判定不合格標", "投標文件未附電子領標憑據，判定不合格標", "標單未蓋與招標文件所附列印模相符之印章，判定不合格標", "詳細價目表未蓋公司大小章，判定不合格標"], "a": 3, "exp": "依「政府採購行為錯誤態樣」，強求騎縫章、未附電子領標憑據即予廢標等，皆屬過度限制競爭之錯誤態樣。若招標文件已明定詳細價目表須蓋廠商大小章以確認法律權責，廠商未蓋章致審查不合格，機關判定不合格標屬合理審查，非屬錯誤態樣。"}, {"id": 33, "cat": "政府採購法", "q": "採購機關依政府採購法第101條規定，將甲廠商刊登為不良廠商，該刊登行為的法律性質為下列何者？", "opts": ["行政指導", "事實行為", "行政契約", "行政處分"], "a": 3, "exp": "依最高行政法院決議及大法官解釋意旨，機關依《政府採購法》第101條將廠商刊登於政府採購公報，致生停權（一定期間內不得投標或作為決標對象）之法律效果，係屬公法上單方行政行為，法律性質為行政處分。"}, {"id": 34, "cat": "政府採購法", "q": "機關辦理新臺幣5萬元採購時，對拒絕往來廠商名單應如何處理？", "opts": ["完全不必查察", "仍應依相關規定辦理查察", "金額超過100萬元才需要查", "由廠商自行聲明即可"], "a": 1, "exp": "依《政府採購法》第103條第1項，刊登於政府採購公報之拒絕往來廠商，於停權期間內不得參加投標或作為決標對象或分包廠商。即使係5萬元小額採購，機關決標前仍應上網查察，避免決標予不良廠商。"}, {"id": 35, "cat": "政府採購法", "q": "某機關為加速辦公室翻修，將原本超過百萬元的採購拆成多個10萬元以下的小額採購，以避免公開招標。下列何者正確？", "opts": ["可以，因為可以加快行政效率", "可以，只要每筆低於10萬元即可", "不可以，不得意圖規避採購法而分批辦理", "可以，只要主管同意即可"], "a": 2, "exp": "依《政府採購法》第14條明定：「機關不得意圖規避本法之適用，分批辦理公告金額以上之採購。」將整體逾百萬之採購化整為零拆成小額採購，屬違法規避公開招標之行為。"}, {"id": 36, "cat": "政府採購法", "q": "依《政府採購法》第10條規定，主管機關為何者？", "opts": ["國家發展委員會", "行政院公共工程委員會", "財政部", "經濟部"], "a": 1, "exp": "依《政府採購法》第10條明定：「本法所稱主管機關，為行政院公共工程委員會。」"}, {"id": 37, "cat": "政府採購法", "q": "機關辦理預算金額新臺幣4,500萬元之工程採購，依現行政府採購金額級距規定，係屬於下列何種採購級距？", "opts": ["小額採購", "未達公告金額之採購", "公告金額以上未達查核金額之採購", "查核金額以上未達巨額之採購"], "a": 2, "exp": "工程採購公告金額為150萬元，查核金額為5,000萬元。本案預算金額為4,500萬元，介於兩者之間，故屬「公告金額以上未達查核金額之採購」。"}, {"id": 38, "cat": "政府採購法", "q": "依政府採購法規定利益迴避規定，何者為正確?", "opts": ["機關承辦、監辦採購人員離職後三年內不得為本人或代理廠商向原任職機關接洽處理離職前五年內與職務有關之事務", "機關人員對於與採購有關之事項，涉及本人、配偶、二親等以內親屬，或共同生活家屬之利益時，應行迴避", "機關首長發現前項人員有應行迴避之情事而未依規定迴避者，應令其迴避，並另行指定人員辦理", "以上皆對"], "a": 3, "exp": "依《政府採購法》第15條第1項至第3項，分別規定離職採購人員旋轉門條款（3年內不得處理離職前5年內相關事務）、親屬利益迴避範圍及首長令其迴避處置。故(A)(B)(C)選項皆完全正確。"}, {"id": 39, "cat": "政府採購法", "q": "依政府採購法所規定之招標方式與規定，何者為錯誤?", "opts": ["採購之招標方式，分為公開招標、選擇性招標及限制性招標", "本法所稱公開招標，指以公告方式邀請不特定廠商投標", "本法所稱選擇性招標，指以公告方式預先依一定資格條件辦理廠商資格審查後，再行邀請符合資格之廠商投標", "本法所稱限制性招標，指不經公告程序，邀請三家以上廠商比價或僅邀請一家廠商議價"], "a": 3, "exp": "依《政府採購法》第18條第4項，限制性招標係指不經公告程序，邀請「二家以上」廠商比價或僅邀請一家廠商議價。非三家以上，故(D)敘述錯誤。"}, {"id": 40, "cat": "政府採購法", "q": "某標案第1次公開招標有3家廠商投標，開標時發現1號廠商外標封內僅裝空白報紙，且經查驗全國商工與營造業登記均無該公司資料（幽靈公司）。本案開標之正確法律效果為何？", "opts": ["宣布開標後廢標", "扣除該無效標封後，實際合格投標家數僅2家，未達法定3家門檻，應宣布「流標」", "直接決標予2號廠商", "要求1號廠商於現場補齊營業事業登記證後繼續審標"], "a": 1, "exp": "依《政府採購法》第48條第1項，第一次公開招標須有3家以上合格廠商投標始得開標。1號廠商為無登記之幽靈公司且封裝空白紙，屬無效投標。扣除後實質合格投標廠商僅剩2家，未達法定3家門檻，應宣布流標。"}, {"id": 41, "cat": "政府採購法", "q": "依《政府採購法》第50條規定，投標廠商有下列哪一種情形時，機關應不予開標或不予決標？", "opts": ["投標文件內容完全符合招標文件規定", "借用或冒用他人名義或證件投標", "廠商依規定繳納押標金", "廠商於規定期限內送達投標文件"], "a": 1, "exp": "依《政府採購法》第50條第1項第3款，廠商有「借用或冒用他人名義或證件投標」者，機關於開標前發現不予開標，開標後發現不予決標。"}, {"id": 42, "cat": "政府採購法", "q": "政府採購法中訂定的採購標的主要區分為三類，分別為？", "opts": ["軟體、硬體、系統", "工程、財物、勞務", "流動資產、固定資產、無形資產", "動產、不動產、無形資產"], "a": 1, "exp": "依《政府採購法》第2條規範，採購分為「工程之定作」、「財物之買受╱定作╱承租」及「勞務之委任╱僱傭」三大類。"}, {"id": 43, "cat": "政府採購法", "q": "以下何種廠商得為採購之分包廠商？", "opts": ["提供該採購審標服務之廠商", "被刊登於政府採購公報且尚在拒絕往來期限內的不良廠商", "提供該採購專案管理服務之廠商", "以上皆非"], "a": 3, "exp": "依《政府採購法》第38條、第39條及《施行細則》第38條，提供審標或專案管理服務之廠商基於利益迴避原則不得為分包廠商；另依第103條，停權期間之拒絕往來廠商亦不得作為分包廠商。故(A)(B)(C)皆不得為分包廠商，正確答案為(D)以上皆非。"}, {"id": 44, "cat": "總決算審編", "q": "依地方制度法第42條，直轄市、縣（市）決算案，地方政府提出及審計機關審核的法定時限何者正確？", "opts": ["地方政府3個月內送審；審計機關4個月內完成", "地方政府4個月內送審；審計機關於決算送達後3個月內完成", "地方政府4個月內送審；審計機關6個月內完成", "地方政府6個月內送審；審計機關3個月內完成"], "a": 1, "exp": "依地方制度法第42條規定，地方政府應於會計年度結束後4個月內編送決算；審計機關則應於決算送達後3個月內完成審核。"}, {"id": 45, "cat": "總決算審編", "q": "依審計法第2條，與總決算審編最直接相關的核心職權為何？", "opts": ["議決地方政府預算", "編製地方政府總決算", "審核財務收支，審定決算", "核定地方政府施政計畫"], "a": 2, "exp": "審計法第2條所定審計職權中，「審核財務收支，審定決算」與總決算審編工作直接相關；議決預算屬地方議會職權，編製決算屬地方政府職權。"}, {"id": 46, "cat": "總決算審編", "q": "地方議會審議總決算審核報告時，下列何者正確？", "opts": ["得重新審定各項收支數額", "得直接修改審計機關審定數", "僅審議附屬單位決算，不審議總決算", "進行監督與問政，但無權更動審定數"], "a": 3, "exp": "地方議會審議總決算審核報告，係進行監督與問政，審計機關之審定數具最終效力，議會無權逕予更動審定數。"}, {"id": 47, "cat": "總決算審編", "q": "總決算數字進行勾稽時，下列何者最符合實務作法？", "opts": ["僅核對政府彙編的總決算總表即可", "以各單位、基金及主管決算等來源逐項勾稽，如有差異應確認並修正", "系統匯入成功後，即可視為數字正確", "僅針對有修正數的機關進行核對"], "a": 1, "exp": "總決算審編實務上應以各單位決算、基金決算及主管決算等來源逐項勾稽比對，如發現差異應確認原因並修正，不能僅憑系統匯入或總表比對。"}, {"id": 48, "cat": "總決算審編", "q": "為何修正數應在總決算審編前優先處理？", "opts": ["因為修正數只影響印刷頁碼", "因為修正數僅供議會參考", "因為修正數會影響審核報告乙、丙、戊篇等後續表件", "因為修正數只能在審核報告送印後處理"], "a": 2, "exp": "修正數如未於審編前優先處理確認，將牽動審核報告乙、丙、戊篇等後續各項表件之正確性，因此應優先處理。"}, {"id": 49, "cat": "總決算審編", "q": "地方總決算審編成果的三冊架構，下列何者正確？", "opts": ["審核報告、預算書、施政報告", "審核報告、參考資料－總決算、參考資料－附屬單位決算", "總決算、單位決算、主管決算", "審核報告、審定書、議會議事錄"], "a": 1, "exp": "地方總決算審編成果依實務架構分為三冊：審核報告、參考資料－總決算、參考資料－附屬單位決算。"}, {"id": 50, "cat": "總決算審編", "q": "系統自動產製檢核表、報表或文稿後，承辦人應如何處理？", "opts": ["直接送印，避免人工更動", "僅檢查版面，不必核對數字", "只要系統沒有錯誤訊息即可陳核", "仍須與決算資料人工勾稽，確認差異原因並作專業判斷"], "a": 3, "exp": "系統自動產製之表件僅為工具輔助，承辦人仍須與決算資料進行人工勾稽，確認差異原因，並運用專業判斷，不能僅憑系統無錯誤訊息即逕行陳核。"}, {"id": 51, "cat": "總決算審編", "q": "關於審核報告審編程序，下列何者正確？", "opts": ["審定書應於審核報告提出議會後繕發", "審定書應在審核報告送印前先行繕發", "審核報告提出議會前不需要機關長官批定", "送印完成即為全部審編程序的終點"], "a": 0, "exp": "審核報告審編程序中，審定書應於審核報告提出議會後始行繕發；報告提出議會前仍須機關長官批定；送印完成並非審編程序終點，尚有提出議會等後續程序。"}];
+
+var state = {};
+try{
+  var saved = JSON.parse(localStorage.getItem('quizState') || '{}');
+  state = saved;
+}catch(e){ state = {}; }
+
+var currentFilter = '全部';
+
+function categories(){
+  var set = ['全部'];
+  QUIZ_DATA.forEach(function(q){ if(set.indexOf(q.cat) === -1) set.push(q.cat); });
+  return set;
+}
+
+function renderFilters(){
+  var row = document.getElementById('filterRow');
+  row.innerHTML = '';
+  categories().forEach(function(c){
+    var chip = document.createElement('div');
+    chip.className = 'chip' + (c === currentFilter ? ' active' : '');
+    chip.textContent = c;
+    chip.addEventListener('click', function(){
+      currentFilter = c;
+      renderFilters();
+      renderQuiz();
+    });
+    row.appendChild(chip);
+  });
+}
+
+function saveState(){
+  localStorage.setItem('quizState', JSON.stringify(state));
+}
+
+function updateTally(){
+  var list = QUIZ_DATA.filter(function(q){ return currentFilter === '全部' || q.cat === currentFilter; });
+  var answered = 0, correct = 0;
+  list.forEach(function(q){
+    var s = state[q.id];
+    if(s !== undefined){ answered++; if(s === q.a) correct++; }
+  });
+  document.getElementById('answeredCount').textContent = answered;
+  document.getElementById('totalCount').textContent = list.length;
+  document.getElementById('correctCount').textContent = correct;
+}
+
+function renderQuiz(){
+  var listEl = document.getElementById('quizList');
+  listEl.innerHTML = '';
+  var list = QUIZ_DATA.filter(function(q){ return currentFilter === '全部' || q.cat === currentFilter; });
+  list.forEach(function(q, idx){
+    var card = document.createElement('div');
+    card.className = 'qcard';
+
+    var meta = document.createElement('div');
+    meta.className = 'qmeta';
+    meta.innerHTML = '<span class="qcat">' + q.cat + '</span><span class="qnum">第 ' + (idx+1) + ' 題 / 共 ' + list.length + ' 題</span>';
+    card.appendChild(meta);
+
+    var qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = q.q;
+    card.appendChild(qtext);
+
+    var ul = document.createElement('ul');
+    ul.className = 'opts';
+    var answeredVal = state[q.id];
+
+    q.opts.forEach(function(optText, i){
+      var li = document.createElement('li');
+      li.className = 'opt';
+      var k = document.createElement('span');
+      k.className = 'k';
+      k.textContent = String.fromCharCode(65+i) + '.';
+      var t = document.createElement('span');
+      t.textContent = optText;
+      li.appendChild(k);
+      li.appendChild(t);
+
+      if(answeredVal !== undefined){
+        li.classList.add('disabled');
+        if(i === q.a) li.classList.add('correct');
+        else if(i === answeredVal) li.classList.add('wrong');
+      }
+
+      li.addEventListener('click', function(){
+        if(state[q.id] !== undefined) return;
+        state[q.id] = i;
+        saveState();
+        renderQuiz();
+        updateTally();
+      });
+      ul.appendChild(li);
+    });
+    card.appendChild(ul);
+
+    var ex = document.createElement('div');
+    ex.className = 'explain' + (answeredVal !== undefined ? ' show' : '');
+    ex.innerHTML = '<b>解析：</b>' + q.exp;
+    card.appendChild(ex);
+
+    listEl.appendChild(card);
+  });
+  updateTally();
+}
+
+document.getElementById('resetQuizBtn').addEventListener('click', function(){
+  if(confirm('確定要清除作答紀錄，重新測驗嗎？')){
+    state = {};
+    saveState();
+    renderQuiz();
+  }
+});
+
+renderFilters();
+renderQuiz();
+
+</script>
+</body>
+</html>
