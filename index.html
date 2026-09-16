@@ -2236,6 +2236,8 @@ var quizHandle2 = initQuiz({
 });
 
 /* ---------- Wrong-answer review ---------- */
+var wrongReviewRevealed = {}; /* qid -> picked index, session-only; hides answer until user attempts it */
+
 function collectWrongItems(){
   var items = [];
   [quizHandle1, quizHandle2].forEach(function(handle){
@@ -2268,6 +2270,8 @@ function renderWrongReview(){
   items.forEach(function(item, idx){
     var q = item.q;
     var handle = item.handle;
+    var revealed = wrongReviewRevealed.hasOwnProperty(q.id);
+    var sessionPicked = revealed ? wrongReviewRevealed[q.id] : undefined;
 
     var card = document.createElement('div');
     card.className = 'qcard';
@@ -2284,7 +2288,6 @@ function renderWrongReview(){
 
     var ul = document.createElement('ul');
     ul.className = 'opts';
-    var currentPicked = item.picked;
 
     q.opts.forEach(function(optText, i){
       var li = document.createElement('li');
@@ -2297,10 +2300,13 @@ function renderWrongReview(){
       li.appendChild(k);
       li.appendChild(t);
 
-      if(i === q.a) li.classList.add('correct');
-      else if(i === currentPicked) li.classList.add('wrong');
+      if(revealed){
+        if(i === q.a) li.classList.add('correct');
+        else if(i === sessionPicked) li.classList.add('wrong');
+      }
 
       li.addEventListener('click', function(){
+        wrongReviewRevealed[q.id] = i;
         handle.setAnswer(q.id, i);
         renderWrongReview();
       });
@@ -2309,13 +2315,13 @@ function renderWrongReview(){
     card.appendChild(ul);
 
     var ex = document.createElement('div');
-    ex.className = 'explain show';
+    ex.className = 'explain' + (revealed ? ' show' : '');
     ex.innerHTML = '<b>解析：</b>' + q.exp;
     card.appendChild(ex);
 
     var retryNote = document.createElement('p');
     retryNote.style.cssText = 'font-size:.8rem;color:var(--muted);margin:.6rem 0 0;';
-    retryNote.textContent = '再次點選選項即可重新作答，答對後這題會自動從錯題複習中移除。';
+    retryNote.textContent = revealed ? '再次點選選項即可重新作答，答對後這題會自動從錯題複習中移除。' : '請先憑記憶作答，再看答案與解析。';
     card.appendChild(retryNote);
 
     listEl.appendChild(card);
