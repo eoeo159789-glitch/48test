@@ -585,6 +585,7 @@ tr:nth-child(even) td{background:#FBFAF5;}
       <div class="navgroup-title">自我測驗</div>
       <div class="navlink" data-page="quiz"><span class="num">✓</span>題庫測驗（52題）</div>
       <div class="navlink" data-page="reviewquiz"><span class="num">✓</span>重點測驗（各章節）</div>
+      <div class="navlink" data-page="wrongreview"><span class="num">✗</span>錯題複習</div>
     </div>
   </nav>
 
@@ -615,6 +616,7 @@ tr:nth-child(even) td{background:#FBFAF5;}
           <div class="home-link" data-page="procurement"><span class="n">13</span><span class="t">採購法實務案例</span><span class="d">圍標、押標金追繳、停權時效等五則案例</span></div>
           <div class="home-link" data-page="ethics"><span class="n">10</span><span class="t">利益衝突與廉政倫理</span><span class="d">利衝法揭露義務、出入境管制</span></div>
           <div class="home-link" data-page="reviewquiz"><span class="n">✓</span><span class="t">重點測驗</span><span class="d">涵蓋第01–13章重點內容的選擇題</span></div>
+          <div class="home-link" data-page="wrongreview"><span class="n">✗</span><span class="t">錯題複習</span><span class="d">自動彙整兩份測驗中答錯的題目，重做加強記憶</span></div>
         </div>
         <div class="sourcebox">
           資料來源：0915上午總決算審編簡報、審計部業務重點簡報（重點.pptx）、第48期新訓課堂投影片照片、預算法會計法政府採購法題庫暨法條依據詳解手冊、決算法補充講義、審計人員訓練施政計畫簡報。
@@ -1999,6 +2001,25 @@ tr:nth-child(even) td{background:#FBFAF5;}
   <div id="quizList2"></div>
 </section>
 
+<!-- ========================= WRONG ANSWER REVIEW ========================= -->
+<section class="page" id="page-wrongreview">
+  <div class="page-eyebrow">SELF TEST</div>
+  <h2 class="page-title">錯題複習</h2>
+  <p class="page-lede">自動彙整「題庫測驗」與「重點測驗」中答錯的題目，集中在這裡重做，加強記憶。答對後該題會自動從清單中移除；答錯的更新也會同步回原本的測驗頁面。</p>
+
+  <div class="quiz-controlbar">
+    <div class="quiz-score">
+      <div class="tally">目前尚待加強 <b id="wrongCount">0</b> 題</div>
+    </div>
+  </div>
+
+  <div id="wrongEmpty" class="card" style="display:none;">
+    <p style="margin:0;">目前沒有錯題記錄。到「題庫測驗」或「重點測驗」作答後，答錯的題目會自動出現在這裡，方便集中複習。</p>
+  </div>
+
+  <div id="wrongList"></div>
+</section>
+
 
 
     </div>
@@ -2032,6 +2053,7 @@ function goPage(id){
   window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
   closeSidebar();
   history.replaceState(null, '', '#' + id);
+  if(id === 'wrongreview' && window.__refreshWrongReview) window.__refreshWrongReview();
 }
 
 navlinks.forEach(function(el){
@@ -2147,6 +2169,7 @@ function initQuiz(cfg){
           saveState();
           renderQuiz();
           updateTally();
+          if(window.__refreshWrongReview) window.__refreshWrongReview();
         });
         ul.appendChild(li);
       });
@@ -2167,15 +2190,29 @@ function initQuiz(cfg){
       state = {};
       saveState();
       renderQuiz();
+      if(window.__refreshWrongReview) window.__refreshWrongReview();
     }
   });
 
   renderFilters();
   renderQuiz();
+
+  return {
+    label: cfg.label,
+    data: cfg.data,
+    getState: function(){ return state; },
+    setAnswer: function(qid, val){
+      state[qid] = val;
+      saveState();
+      renderQuiz();
+      updateTally();
+    }
+  };
 }
 
-initQuiz({
+var quizHandle1 = initQuiz({
   data: QUIZ_DATA,
+  label: '題庫測驗',
   storageKey: 'quizState',
   filterRowId: 'filterRow',
   answeredId: 'answeredCount',
@@ -2185,8 +2222,9 @@ initQuiz({
   listId: 'quizList'
 });
 
-initQuiz({
+var quizHandle2 = initQuiz({
   data: QUIZ_DATA2,
+  label: '重點測驗',
   storageKey: 'quizState2',
   filterRowId: 'filterRow2',
   answeredId: 'answeredCount2',
@@ -2196,6 +2234,95 @@ initQuiz({
   listId: 'quizList2',
   totalBadgeId: 'q2Total'
 });
+
+/* ---------- Wrong-answer review ---------- */
+function collectWrongItems(){
+  var items = [];
+  [quizHandle1, quizHandle2].forEach(function(handle){
+    var state = handle.getState();
+    handle.data.forEach(function(q){
+      var s = state[q.id];
+      if(s !== undefined && s !== q.a){
+        items.push({ handle: handle, q: q, picked: s });
+      }
+    });
+  });
+  return items;
+}
+
+function renderWrongReview(){
+  var listEl = document.getElementById('wrongList');
+  var countEl = document.getElementById('wrongCount');
+  if(!listEl || !countEl) return;
+  var items = collectWrongItems();
+  countEl.textContent = items.length;
+  listEl.innerHTML = '';
+
+  var emptyEl = document.getElementById('wrongEmpty');
+  if(items.length === 0){
+    emptyEl.style.display = 'block';
+    return;
+  }
+  emptyEl.style.display = 'none';
+
+  items.forEach(function(item, idx){
+    var q = item.q;
+    var handle = item.handle;
+
+    var card = document.createElement('div');
+    card.className = 'qcard';
+
+    var meta = document.createElement('div');
+    meta.className = 'qmeta';
+    meta.innerHTML = '<span class="qcat">' + q.cat + '</span><span class="qnum">來源：' + handle.label + '　第 ' + (idx+1) + ' 題 / 共 ' + items.length + ' 題</span>';
+    card.appendChild(meta);
+
+    var qtext = document.createElement('div');
+    qtext.className = 'qtext';
+    qtext.textContent = q.q;
+    card.appendChild(qtext);
+
+    var ul = document.createElement('ul');
+    ul.className = 'opts';
+    var currentPicked = item.picked;
+
+    q.opts.forEach(function(optText, i){
+      var li = document.createElement('li');
+      li.className = 'opt';
+      var k = document.createElement('span');
+      k.className = 'k';
+      k.textContent = String.fromCharCode(65+i) + '.';
+      var t = document.createElement('span');
+      t.textContent = optText;
+      li.appendChild(k);
+      li.appendChild(t);
+
+      if(i === q.a) li.classList.add('correct');
+      else if(i === currentPicked) li.classList.add('wrong');
+
+      li.addEventListener('click', function(){
+        handle.setAnswer(q.id, i);
+        renderWrongReview();
+      });
+      ul.appendChild(li);
+    });
+    card.appendChild(ul);
+
+    var ex = document.createElement('div');
+    ex.className = 'explain show';
+    ex.innerHTML = '<b>解析：</b>' + q.exp;
+    card.appendChild(ex);
+
+    var retryNote = document.createElement('p');
+    retryNote.style.cssText = 'font-size:.8rem;color:var(--muted);margin:.6rem 0 0;';
+    retryNote.textContent = '再次點選選項即可重新作答，答對後這題會自動從錯題複習中移除。';
+    card.appendChild(retryNote);
+
+    listEl.appendChild(card);
+  });
+}
+window.__refreshWrongReview = renderWrongReview;
+renderWrongReview();
 
 </script>
 </body>
